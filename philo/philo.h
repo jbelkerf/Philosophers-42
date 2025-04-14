@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 15:44:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/14 11:25:16 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/14 12:14:36 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,12 @@
 typedef struct s_data{
 	int	number_of_philos;
 	int	time_to_die;
-	int	time_to_die;
+	int	time_to_eat;
 	int	time_to_sleep;
 	int	optional;
+	pthread_t	*tids;
 }	t_data;
+
+int	ft_atoi(char *str);
 
 #endif
