@@ -34,3 +34,5 @@ typedef struct s_data{
 int	ft_atoi(char *str);
 
 #endif
+
+
