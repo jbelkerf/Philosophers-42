@@ -22,8 +22,18 @@ void	print_data(t_data *data)
 		printf("optional: %d\n", data->optional);
 }
 
-void	initialite_data(int ac, char **av, t_data *data)
+t_philo	*initialite_data(int ac, char **av, t_data *data, t_philo *philo)
 {
+	int i = 0;
+
+	philo = malloc(data->number_of_philos * sizeof(t_philo));
+	data->forks = malloc(data->number_of_philos * sizeof(int));
+	while (i < data->number_of_philos)
+	{
+		pthread_mutex_init(&(data->forks[i]), NULL);
+		i++;
+	}
+	pthread_mutex_init(&(data->print), NULL);
 	data->number_of_philos = ft_atoi(av[1]);
 	data->time_to_die = ft_atoi(av[2]);
 	data->time_to_eat = ft_atoi(av[3]);
@@ -32,6 +42,7 @@ void	initialite_data(int ac, char **av, t_data *data)
 	data->tids = malloc(sizeof(pthread_t) * (data->number_of_philos));
 	if (ac == 6)
 		data->optional = ft_atoi(av[5]);
+	return (philo);
 }
 
 void	non_valid_arguments(char ac)
@@ -48,25 +59,67 @@ void	non_valid_arguments(char ac)
 
 void	routine(void *arg)
 {
-	t_data	*data;
+	t_philo *philo;
 
-	data = (t_data *)arg;
-	printf("\n----hey i am philosopher");
-	printf("Thread %d started----\n", (int)pthread_self());
-	pthread_exit(NULL);
+	philo = (t_philo *)arg;
+	if (philo->philo_matricule == philo->data->number_of_philos)
+	{
+		pthread_mutex_lock(&(philo->data->forks[0]));
+	}
+	else
+		pthread_mutex_lock(&(philo->data->forks[philo->philo_matricule]));
+	if (philo->philo_matricule == 1)
+		pthread_mutex_lock(&(philo->data->forks[philo->data->number_of_philos - 1]));
+	else
+		pthread_mutex_lock(&(philo->data->forks[philo->philo_matricule - 1]));
+	pthread_mutex_lock(&(philo->data->print));
+	printf("----hey i am philosopher %d-----\n", philo->philo_matricule);
+	pthread_mutex_unlock(&(philo->data->print));
+	usleep(1000000);
+	if (philo->philo_matricule == philo->data->number_of_philos)
+		pthread_mutex_unlock(&(philo->data->forks[0]));
+	else
+		pthread_mutex_unlock(&(philo->data->forks[philo->philo_matricule]));
+	if (philo->philo_matricule == 1)
+		pthread_mutex_unlock(&(philo->data->forks[philo->data->number_of_philos - 1]));
+	else
+		pthread_mutex_unlock(&(philo->data->forks[philo->philo_matricule - 1]));
 }
 
 int	main(int ac, char **av)
 {
-	t_data		data;
-	int			i = 0;
+	t_philo	*philos;
+	int		i = 0;
 
 	non_valid_arguments(ac);
-	initialite_data(ac, av, &data);
+	philos = NULL;
+	philos = initialite_data(ac, av, philos);
 	//print_data(&data);
+	while (i < philos.data->number_of_philos)
+	{
+		if ( i % 2 == 0)
+		{
+			philos[i].data = &data;
+			philos[i].philo_matricule = i + 1;
+			pthread_create(&data.tids[i], NULL, (void *)routine, (void *)&(philos[i]));
+			i++;
+		}
+	}
+	i = 0;
 	while (i < data.number_of_philos)
 	{
-		pthread_create(&data.tids[i], NULL, (void *)routine, (void *)&data);
+		if ( i % 2 != 0)
+		{
+			philos[i].data = &data;
+			philos[i].philo_matricule = i + 1;
+			pthread_create(&data.tids[i], NULL, (void *)routine, (void *)&(philos[i]));
+			i++;
+		}
+	}
+	i = 0;
+	while (i < data.number_of_philos)
+	{
+		pthread_join(data.tids[i], NULL);
 		i++;
 	}
 }

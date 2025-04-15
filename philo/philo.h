@@ -23,6 +23,8 @@
 # include <sys/time.h> //gettimeofday
 
 typedef struct s_data{
+	pthread_mutex_t print;
+	pthread_mutex_t *forks;
 	int	number_of_philos;
 	int	time_to_die;
 	int	time_to_eat;
@@ -30,6 +32,13 @@ typedef struct s_data{
 	int	optional;
 	pthread_t	*tids;
 }	t_data;
+
+typedef struct s_philo{
+	t_data	*data;
+	int philo_matricule;
+}	t_philo;
+
+
 
 int	ft_atoi(char *str);
 
