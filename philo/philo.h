@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 15:44:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/14 12:14:36 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/17 13:21:25 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,30 @@
 # include <sys/time.h> //gettimeofday
 
 typedef struct s_data{
-	pthread_mutex_t print;
-	pthread_mutex_t **forks;
-	int	number_of_philos;
-	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	optional;
-	pthread_t	*tids;
+	pthread_mutex_t	print;
+	pthread_mutex_t	**forks;
+	int				number_of_philos;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				optional;
+	pthread_t		*tids;
 }	t_data;
 
 typedef struct s_philo{
 	t_data	*data;
-	int philo_matricule;
+	int		philo_matricule;
 }	t_philo;
 
 
+// atoi
+int		ft_atoi(char *str);
 
-int	ft_atoi(char *str);
+
+// initial_data
+t_philo	*initialize_philos(t_data *data);
+t_data	*initialize_data(int ac, char **av);
+void	non_valid_arguments(char ac);
+void	print_philos(t_philo *philo);
 
 #endif
-
-
