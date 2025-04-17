@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:22:08 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/17 16:48:35 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/17 20:14:50 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,41 @@ void	*routine(void *param)
 	t_philo			*philo;
 	pthread_mutex_t	f_fork;
 	pthread_mutex_t	s_fork;
+	struct timeval	time_now;
 
 	philo = param;
 	set_forks(&f_fork, &s_fork, philo);
+	log_philo(philo->philo_matricule, &(philo->data->print));
+	gettimeofday(&time_now, NULL);
+	philo->last_meal = time_now.tv_usec;
 	while (1337)
 	{
-		log_philo(philo->philo_matricule, &(philo->data->print));
 		take_fork(&f_fork, &s_fork, philo);//  * TAKE a FORK
-		philo_eat(philo);//  			* EAT
-		give_fork(&f_fork, &s_fork);//  * GIVE a FORK
-		philo_sleep(philo);//           * SLEEP
-		philo_think(philo);//           * THINK
+		if (check_die(philo))
+		{
+			printf("TIME %d died\n", philo->philo_matricule);
+			return (NULL);
+		}
+		philo_eat(philo);//  			       * EAT
+		give_fork(&f_fork, &s_fork);//         * GIVE a FORK
+		if (check_die(philo))
+		{
+			printf("TIME %d died\n", philo->philo_matricule);
+			return (NULL);
+		}
+		philo_sleep(philo);//                  * SLEEP
+		if (check_die(philo))
+		{
+			printf("TIME %d died\n", philo->philo_matricule);
+			return (NULL);
+		}
+		philo_think(philo);//                  * THINK
+		if (check_die(philo))
+		{
+			printf("TIME %d died\n", philo->philo_matricule);
+			return (NULL);
+		}
 	}
-	return (NULL);
 }
 
 void	start_simulation(t_philo *philos)

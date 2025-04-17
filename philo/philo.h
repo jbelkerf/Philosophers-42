@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 15:44:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/17 16:49:02 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/17 20:00:39 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_data{
 
 typedef struct s_philo{
 	t_data	*data;
+	long	last_meal;
 	int		philo_matricule;
 }	t_philo;
 
@@ -66,5 +67,7 @@ void	philo_sleep(t_philo *philo);
 //* EAT
 void	philo_eat(t_philo *philo);
 
+//* DIE
+int		check_die(t_philo *philo);
 
 #endif

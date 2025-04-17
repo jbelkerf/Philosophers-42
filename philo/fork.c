@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:14:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/17 16:48:15 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/17 20:10:17 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,12 @@ void	give_fork(pthread_mutex_t *f_fork, pthread_mutex_t *s_fork)
 
 void	philo_eat(t_philo *philo)
 {
-	usleep(philo->data->time_to_eat * 1000);
+	struct timeval	time_now;
+
 	printf("TIME %d is eating\n", philo->philo_matricule);
+	usleep(philo->data->time_to_eat * 1000);
+	gettimeofday(&time_now, NULL);
+	philo->last_meal = time_now.tv_usec;
 }
 
 void	philo_sleep(t_philo *philo)
@@ -60,4 +64,19 @@ void	philo_sleep(t_philo *philo)
 void	philo_think(t_philo *philo)
 {
 	printf("TIME %d is thinking\n", philo->philo_matricule);
+}
+
+int	check_die(t_philo *philo)
+{
+	struct timeval	time_now;
+	long			time_to_die;
+	long			time_last_meal;
+
+	gettimeofday(&time_now, NULL);
+	time_to_die = philo->data->time_to_die * 1000;
+	time_last_meal = time_now.tv_usec - philo->last_meal;
+	printf("time to die %ld time last meal %ld \n", time_to_die, time_last_meal);
+	if (time_last_meal > time_to_die)
+		return (1);
+	return (0);
 }

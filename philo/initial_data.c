@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 13:17:13 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/17 16:47:04 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/17 20:13:34 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,18 +53,6 @@ t_data	*initialize_data(int ac, char **av)
 	return (data);
 }
 
-void	non_valid_arguments(char ac)
-{
-	if (ac != 5 && ac != 6)
-	{
-		printf("\033[0;31mUsage Eroor!\n");
-		printf("\033[38;5;208mHow to use:\n\tphilo number_of_philosophers time_");
-		printf("\033[38;5;208mto_die time_to_eat time_to_sleep [number_of_");
-		printf("\033[38;5;208mtimes_each_philosopher_must_eat]\n");
-		exit(1);
-	}
-}
-
 t_philo	*initialize_philos(t_data *data)
 {
 	t_philo	*philos;
@@ -76,7 +64,20 @@ t_philo	*initialize_philos(t_data *data)
 	{
 		philos[i].data = data;
 		philos[i].philo_matricule = i;
+		philos[i].last_meal = 0;
 		i++;
 	}
 	return (philos);
+}
+
+void	non_valid_arguments(char ac)
+{
+	if (ac != 5 && ac != 6)
+	{
+		printf("\033[0;31mUsage Eroor!\n");
+		printf("\033[38;5;208mHow to use:\n\tphilo number_of_philosophers time_");
+		printf("\033[38;5;208mto_die time_to_eat time_to_sleep [number_of_");
+		printf("\033[38;5;208mtimes_each_philosopher_must_eat]\n");
+		exit(1);
+	}
 }
