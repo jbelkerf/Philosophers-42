@@ -24,7 +24,7 @@
 
 typedef struct s_data{
 	pthread_mutex_t print;
-	pthread_mutex_t *forks;
+	pthread_mutex_t **forks;
 	int	number_of_philos;
 	int	time_to_die;
 	int	time_to_eat;
