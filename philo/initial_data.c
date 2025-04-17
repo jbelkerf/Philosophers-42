@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 13:17:13 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/17 20:55:11 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/17 21:16:48 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_data	*initialize_data(int ac, char **av)
 	int		i;
 
 	data = malloc(sizeof(t_data));
+	data->death_spreeded = 0;
 	data->start_time = 0;
 	data->number_of_philos = ft_atoi(av[1]);
 	data->time_to_die = ft_atoi(av[2]);
@@ -46,7 +47,7 @@ t_data	*initialize_data(int ac, char **av)
 	pthread_mutex_init(&(data->print), NULL);
 	i = 0;
 	data->tids = malloc(data->number_of_philos * sizeof(pthread_t));
-	data->forks = malloc(data->number_of_philos * sizeof(pthread_mutex_t));
+	data->forks = malloc(data->number_of_philos * sizeof(t_mutex));
 	while (i < data->number_of_philos)
 	{
 		pthread_mutex_init(&(data->forks[i++]), NULL);

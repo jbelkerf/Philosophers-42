@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:22:08 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/17 21:02:16 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/17 21:14:24 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	*routine(void *param)
 {
 	t_philo			*philo;
-	pthread_mutex_t	f_fork;
-	pthread_mutex_t	s_fork;
+	t_mutex	f_fork;
+	t_mutex	s_fork;
 	struct timeval	time_now;
 
 	philo = param;
 	set_forks(&f_fork, &s_fork, philo);
-	log_philo(philo->philo_matricule, &(philo->data->print));
+	//log_philo(philo->philo_matricule, &(philo->data->print));
 	gettimeofday(&time_now, NULL);
 	philo->last_meal = time_now.tv_usec;
 	philo->data->start_time = time_now.tv_usec;
