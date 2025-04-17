@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 13:17:13 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/17 13:48:40 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/17 16:47:04 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	print_philos(t_philo *philo)
 		printf("Time to eat: %d\n", philo[i].data->time_to_eat);
 		printf("Time to sleep: %d\n", philo[i].data->time_to_sleep);
 		printf("Optional: %d\n", philo[i].data->optional);
-		printf("Forks: %p<----\n", philo[i].data->forks[i]);
 		i++;
 	}
 }
@@ -45,14 +44,12 @@ t_data	*initialize_data(int ac, char **av)
 		data->optional = -1;
 	pthread_mutex_init(&(data->print), NULL);
 	i = 0;
-	data->forks = malloc(data->number_of_philos * sizeof(pthread_t));
-	data->forks = malloc(data->number_of_philos * sizeof(pthread_mutex_t *));
+	data->tids = malloc(data->number_of_philos * sizeof(pthread_t));
+	data->forks = malloc(data->number_of_philos * sizeof(pthread_mutex_t));
 	while (i < data->number_of_philos)
 	{
-		data->forks[i] = malloc(sizeof(pthread_mutex_t));
-		pthread_mutex_init(data->forks[i++], NULL);
+		pthread_mutex_init(&(data->forks[i++]), NULL);
 	}
-	data->tids = malloc(data->number_of_philos * sizeof(pthread_t));
 	return (data);
 }
 

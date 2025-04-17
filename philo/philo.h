@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 15:44:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/17 13:21:25 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/17 16:49:02 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 typedef struct s_data{
 	pthread_mutex_t	print;
-	pthread_mutex_t	**forks;
+	pthread_mutex_t	*forks;
 	int				number_of_philos;
 	int				time_to_die;
 	int				time_to_eat;
@@ -39,14 +39,32 @@ typedef struct s_philo{
 }	t_philo;
 
 
-// atoi
+//* ATOI
 int		ft_atoi(char *str);
 
 
-// initial_data
+//* INITAILIZE DATA
 t_philo	*initialize_philos(t_data *data);
 t_data	*initialize_data(int ac, char **av);
 void	non_valid_arguments(char ac);
 void	print_philos(t_philo *philo);
+
+//* LOG PHILO
+void	log_philo(int philo_matricule, pthread_mutex_t *print_mutex);
+
+//* FORKS
+void	set_forks(pthread_mutex_t *f, pthread_mutex_t *s, t_philo *philo);
+void	take_fork(pthread_mutex_t *f_fork, pthread_mutex_t *s_fork, t_philo *philo);
+void	give_fork(pthread_mutex_t *f_fork, pthread_mutex_t *s_fork);
+
+//* THINK
+void	philo_think(t_philo *philo);
+
+//* SLEEP
+void	philo_sleep(t_philo *philo);
+
+//* EAT
+void	philo_eat(t_philo *philo);
+
 
 #endif
