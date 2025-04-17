@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:22:08 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/17 20:14:50 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/17 21:02:16 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,31 +24,32 @@ void	*routine(void *param)
 	log_philo(philo->philo_matricule, &(philo->data->print));
 	gettimeofday(&time_now, NULL);
 	philo->last_meal = time_now.tv_usec;
+	philo->data->start_time = time_now.tv_usec;
 	while (1337)
 	{
 		take_fork(&f_fork, &s_fork, philo);//  * TAKE a FORK
 		if (check_die(philo))
 		{
-			printf("TIME %d died\n", philo->philo_matricule);
+			printf("%ld %d died\n", get_timestamp(philo), philo->philo_matricule);
 			return (NULL);
 		}
 		philo_eat(philo);//  			       * EAT
 		give_fork(&f_fork, &s_fork);//         * GIVE a FORK
 		if (check_die(philo))
 		{
-			printf("TIME %d died\n", philo->philo_matricule);
+			printf("%ld %d died\n", get_timestamp(philo), philo->philo_matricule);
 			return (NULL);
 		}
 		philo_sleep(philo);//                  * SLEEP
 		if (check_die(philo))
 		{
-			printf("TIME %d died\n", philo->philo_matricule);
+			printf("%ld %d died\n", get_timestamp(philo), philo->philo_matricule);
 			return (NULL);
 		}
 		philo_think(philo);//                  * THINK
 		if (check_die(philo))
 		{
-			printf("TIME %d died\n", philo->philo_matricule);
+			printf("%ld %d died\n", get_timestamp(philo), philo->philo_matricule);
 			return (NULL);
 		}
 	}

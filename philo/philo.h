@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 15:44:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/17 20:00:39 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/17 20:50:18 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_data{
 	int				time_to_sleep;
 	int				optional;
 	pthread_t		*tids;
+	long			start_time;
 }	t_data;
 
 typedef struct s_philo{
