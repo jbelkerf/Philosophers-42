@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 15:44:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/19 17:39:19 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/19 20:55:50 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@
 # include <unistd.h>   //*write  usleep 
 # include <sys/time.h> //*gettimeofday
 
+typedef pthread_mutex_t	t_mutex;
+
+typedef struct	s_fork{
+	int		number;
+	t_mutex	fork;
+}	t_fork;
+
 typedef struct s_flag{
 	pthread_mutex_t	mutex;
 	long			value;
@@ -29,7 +36,7 @@ typedef struct s_flag{
 
 typedef struct s_data{
 	pthread_mutex_t	print;
-	pthread_mutex_t	*forks;
+	t_fork			*forks;
 	int				number_of_philos;
 	t_flag			death_spreed;
 	int				time_to_die;
@@ -42,14 +49,13 @@ typedef struct s_data{
 
 typedef struct s_philo{
 	t_data			*data;
-	pthread_mutex_t *first_fork;
-	pthread_mutex_t	*second_fork;
+	t_fork			first_fork;
+	t_fork			second_fork;
 	long			last_meal;
 	int				number_of_meals;
 	int				philo_matricule;
 }	t_philo;
 
-typedef pthread_mutex_t	t_mutex;
 
 
 //* SIMULATION
@@ -58,9 +64,9 @@ void	*routine(void *param);
 
 
 //* PHILO ACTION
-void	take_fork(t_mutex *fork, t_philo *philo);
+void	take_fork(t_philo *philo);
 void	philo_eat(t_philo *philo);
-void	give_forks(t_mutex *first_fork, t_mutex *second_fork);
+void	give_forks(t_philo *philo);
 void	philo_sleep(t_philo *philo);
 void	philo_think(t_philo *philo);
 void	*die(t_philo *philo);
@@ -77,7 +83,7 @@ void	print_philos(t_philo *philo);
 
 
 //* FORKS
-void	set_forks(t_mutex *f, t_mutex *s, t_philo *philo);
+void	set_forks(t_philo *philo);
 
 //* DIE
 int		check_die(t_philo *philo);

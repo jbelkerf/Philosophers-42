@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 13:17:13 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/19 17:41:32 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/19 20:45:30 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,13 @@ t_data	*initialize_data(int ac, char **av)
 	pthread_mutex_init(&(data->print), NULL);
 	i = 0;
 	data->tids = malloc(data->number_of_philos * sizeof(pthread_t));
-	data->forks = malloc(data->number_of_philos * sizeof(t_mutex));
 	pthread_mutex_init(&(data->death_spreed.mutex), NULL);
+	data->forks = malloc(data->number_of_philos * sizeof(t_fork));
 	while (i < data->number_of_philos)
 	{
-		pthread_mutex_init(&(data->forks[i++]), NULL);
+		data->forks[i].number = i;
+		pthread_mutex_init(&(data->forks[i].fork), NULL);
+		i++;
 	}
 	return (data);
 }
@@ -69,7 +71,7 @@ t_philo	*initialize_philos(t_data *data)
 		philos[i].philo_matricule = i;
 		philos[i].last_meal = 0;
 		philos[i].number_of_meals = 0;
-		set_forks(philos[i].first_fork, philos[i].second_fork, &philos[i]); //! here the segvault
+		set_forks(&philos[i]); //! here the segvault
 		i++;
 	}
 	return (philos);

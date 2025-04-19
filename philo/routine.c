@@ -6,26 +6,31 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:04:30 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/19 17:38:52 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/19 20:56:18 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	take_fork(t_mutex *fork, t_philo *philo)
+void	take_fork(t_philo *philo)
 {
 	int	matricule;
 
 	matricule = philo->philo_matricule;
-	pthread_mutex_lock(fork);
+	pthread_mutex_lock(&(philo->first_fork.fork));
+	pthread_mutex_lock(&(philo->second_fork.fork));
+	pthread_mutex_lock(&(philo->data->print));
 	printf("%ld %d has taken a fork\n", get_timestamp(philo), matricule);
+	pthread_mutex_unlock(&(philo->data->print));
 }
 
 void	philo_eat(t_philo *philo)
 {
 	struct timeval	time_now;
 
+	pthread_mutex_lock(&(philo->data->print));
 	printf("%ld %d is eating\n", get_timestamp(philo), philo->philo_matricule);
+	pthread_mutex_unlock(&(philo->data->print));
 	philo->number_of_meals++;
 	usleep(philo->data->time_to_eat * 1000);
 	gettimeofday(&time_now, NULL);
@@ -34,17 +39,21 @@ void	philo_eat(t_philo *philo)
 
 void	philo_sleep(t_philo *philo)
 {
+	pthread_mutex_lock(&(philo->data->print));
 	printf("%ld %d is sleeping\n", get_timestamp(philo), philo->philo_matricule);
+	pthread_mutex_unlock(&(philo->data->print));
 	usleep(philo->data->time_to_sleep * 1000);
 }
 
 void	philo_think(t_philo *philo)
 {
+	pthread_mutex_lock(&(philo->data->print));
 	printf("%ld %d is thinking\n", get_timestamp(philo), philo->philo_matricule);
+	pthread_mutex_unlock(&(philo->data->print));
 }
 
-void	give_forks(t_mutex *first_fork, t_mutex *second_fork)
+void	give_forks(t_philo *philo)
 {
-	pthread_mutex_unlock(first_fork);
-	pthread_mutex_unlock(second_fork);
+	pthread_mutex_unlock(&(philo->first_fork.fork));
+	pthread_mutex_unlock(&(philo->second_fork.fork));
 }

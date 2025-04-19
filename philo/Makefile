@@ -6,7 +6,7 @@
 #    By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/17 16:30:24 by jbelkerf          #+#    #+#              #
-#    Updated: 2025/04/19 16:11:04 by jbelkerf         ###   ########.fr        #
+#    Updated: 2025/04/19 17:49:45 by jbelkerf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ CC=cc
 SANITIZE_THREAD= -fsanitize=thread -g
 SANITIZE_MEMORY= -fsanitize=address -g
 
-CFLAGS= -Wall -Wextra -Werror -pthread 
+CFLAGS=  -pthread 
 
 HEADER= philo.h
 
