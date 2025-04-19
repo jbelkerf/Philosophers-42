@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:14:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/18 15:45:38 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/19 15:30:46 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,15 @@ int	check_optional(t_philo *philos)
 	return (flag);
 }
 
-void	log_philo(int philo_matricule, t_mutex *print_mutex)
-{
-	pthread_mutex_lock(print_mutex);
-	printf("philo %d dkhal\n", philo_matricule);
-	pthread_mutex_unlock(print_mutex);
-}
-
 long	get_timestamp(t_philo *philo)
 {
 	struct timeval	time_now;
+	time_t			current_time;
 
 	gettimeofday(&time_now, NULL);
-	return ((time_now.tv_sec - philo->data->start_time) / 1000);
+	current_time = (time_now.tv_sec * 1000) + (time_now.tv_usec / 1000);
+	//!printf("current time %ld   start time %ld\n", current_time, philo->data->start_time);
+	return ((current_time - philo->data->start_time));
 }
 
 void	set_forks(t_mutex *f, t_mutex *s, t_philo *philo)
@@ -61,14 +57,21 @@ int	check_die(t_philo *philo)
 	long			time_to_die;
 	long			time_last_meal;
 
-	if (philo->data->death_spreeded)
+	pthread_mutex_lock(&(philo->data->death_spreed.mutex));
+	if (philo->data->death_spreed.value)
+	{
+		pthread_mutex_unlock(&(philo->data->death_spreed.mutex));
 		return (1);
+	}
+	pthread_mutex_unlock(&(philo->data->death_spreed.mutex));
 	gettimeofday(&time_now, NULL);
 	time_to_die = philo->data->time_to_die * 1000;
 	time_last_meal = time_now.tv_usec - philo->last_meal;
 	if (time_last_meal > time_to_die)
 	{
-		philo->data->death_spreeded = 1;
+		pthread_mutex_lock(&(philo->data->death_spreed.mutex));
+		philo->data->death_spreed.value = 1;
+		pthread_mutex_unlock(&(philo->data->death_spreed.mutex));
 		return (1);
 	}
 	return (0);

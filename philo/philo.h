@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 15:44:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/19 12:50:37 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/19 14:54:07 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,19 @@
 
 typedef struct s_flag{
 	pthread_mutex_t	mutex;
-	int				value;
+	long			value;
 }	t_flag;
 
 typedef struct s_data{
 	pthread_mutex_t	print;
 	pthread_mutex_t	*forks;
 	int				number_of_philos;
-	t_flag			dead_spreed;
+	t_flag			death_spreed;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				optional;
-	long			start_time;
+	time_t			start_time;
 	pthread_t		*tids;
 }	t_data;
 
@@ -52,6 +52,8 @@ typedef pthread_mutex_t	t_mutex;
 //* ATOI
 int		ft_atoi(char *str);
 
+//* ROUTINE
+void	*routine(void *param);
 
 //* INITAILIZE DATA
 t_philo	*initialize_philos(t_data *data);
@@ -64,8 +66,8 @@ void	log_philo(int philo_matricule, pthread_mutex_t *print_mutex);
 
 //* FORKS
 void	set_forks(pthread_mutex_t *f, pthread_mutex_t *s, t_philo *philo);
-void	take_fork(pthread_mutex_t *f_fork, pthread_mutex_t *s_fork, t_philo *philo);
-void	give_fork(pthread_mutex_t *f_fork, pthread_mutex_t *s_fork);
+void	take_fork(t_mutex *fork, t_philo *philo);
+void	give_fork(t_mutex *fork);
 
 //* THINK
 void	philo_think(t_philo *philo);
