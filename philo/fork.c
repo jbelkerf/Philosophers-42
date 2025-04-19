@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:14:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/19 15:30:46 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/19 15:45:03 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,9 @@ void	set_forks(t_mutex *f, t_mutex *s, t_philo *philo)
 int	check_die(t_philo *philo)
 {
 	struct timeval	time_now;
-	long			time_to_die;
-	long			time_last_meal;
+	time_t			time_to_die;
+	time_t			time_last_meal;
+	time_t			current_time;
 
 	pthread_mutex_lock(&(philo->data->death_spreed.mutex));
 	if (philo->data->death_spreed.value)
@@ -65,8 +66,9 @@ int	check_die(t_philo *philo)
 	}
 	pthread_mutex_unlock(&(philo->data->death_spreed.mutex));
 	gettimeofday(&time_now, NULL);
-	time_to_die = philo->data->time_to_die * 1000;
-	time_last_meal = time_now.tv_usec - philo->last_meal;
+	current_time = (time_now.tv_sec * 1000) + (time_now.tv_usec / 1000);
+	time_to_die = philo->data->time_to_die;
+	time_last_meal = current_time - philo->last_meal;
 	if (time_last_meal > time_to_die)
 	{
 		pthread_mutex_lock(&(philo->data->death_spreed.mutex));

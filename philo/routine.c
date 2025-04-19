@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:04:30 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/19 14:52:58 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/19 15:39:10 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	philo_eat(t_philo *philo)
 	philo->number_of_meals++;
 	usleep(philo->data->time_to_eat * 1000);
 	gettimeofday(&time_now, NULL);
-	philo->last_meal = time_now.tv_usec;
+	philo->last_meal = (time_now.tv_usec / 1000) + (time_now.tv_sec * 1000);
 }
 
 void	philo_sleep(t_philo *philo)
