@@ -6,11 +6,27 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:14:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/18 11:45:22 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/18 15:45:38 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int	check_optional(t_philo *philos)
+{
+	int	i;
+	int	flag;
+
+	i = 0;
+	flag = 1;
+	while (i < philos[0].data->number_of_philos)
+	{
+		if (philos[i].number_of_meals < philos[i].data->optional)
+			flag = 0;
+		i++;
+	}
+	return (flag);
+}
 
 void	log_philo(int philo_matricule, t_mutex *print_mutex)
 {

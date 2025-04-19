@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:22:08 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/18 11:49:37 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/18 15:45:57 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,34 @@ void	*die(t_philo *philo)
 {
 	printf("%ld %d died\n", get_timestamp(philo), philo->philo_matricule);
 	return (NULL);
+}
+
+void	start_simulation(t_philo *philos)
+{
+	int			i;
+	pthread_t	*tids;
+
+	i = 0;
+	tids = philos->data->tids;
+	while (i < philos[0].data->number_of_philos)
+	{
+		if (i % 2 == 0)
+			pthread_create(&(tids[i]), NULL, routine, &(philos[i]));
+		i++;
+	}
+	i = 0;
+	while (i < philos[0].data->number_of_philos)
+	{
+		if (i % 2 != 0)
+			pthread_create(&(tids[i]), NULL, routine, &(philos[i]));
+		i++;
+	}
+	i = 0;
+	while (i < philos[0].data->number_of_philos)
+	{
+		pthread_join(philos[0].data->tids[i], NULL);
+		i++;
+	}
 }
 
 void	*routine(void *param)
@@ -48,33 +76,6 @@ void	*routine(void *param)
 	}
 }
 
-void	start_simulation(t_philo *philos)
-{
-	int			i;
-	pthread_t	*tids;
-
-	i = 0;
-	tids = philos->data->tids;
-	while (i < philos[0].data->number_of_philos)
-	{
-		if (i % 2 == 0)
-			pthread_create(&(tids[i]), NULL, routine, &(philos[i]));
-		i++;
-	}
-	i = 0;
-	while (i < philos[0].data->number_of_philos)
-	{
-		if (i % 2 != 0)
-			pthread_create(&(tids[i]), NULL, routine, &(philos[i]));
-		i++;
-	}
-	i = 0;
-	while (i < philos[0].data->number_of_philos)
-	{
-		pthread_join(philos[0].data->tids[i], NULL);
-		i++;
-	}
-}
 
 int	main(int ac, char **av)
 {

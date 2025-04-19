@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 13:17:13 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/17 21:16:48 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/18 15:22:45 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ t_philo	*initialize_philos(t_data *data)
 		philos[i].data = data;
 		philos[i].philo_matricule = i;
 		philos[i].last_meal = 0;
+		philos[i].number_of_meals = 0;
 		i++;
 	}
 	return (philos);

@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 15:44:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/17 21:17:02 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/19 12:50:37 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,16 @@
 # include <unistd.h>   //*write  usleep 
 # include <sys/time.h> //*gettimeofday
 
+typedef struct s_flag{
+	pthread_mutex_t	mutex;
+	int				value;
+}	t_flag;
+
 typedef struct s_data{
 	pthread_mutex_t	print;
 	pthread_mutex_t	*forks;
 	int				number_of_philos;
-	int				death_spreeded;
+	t_flag			dead_spreed;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
@@ -38,6 +43,7 @@ typedef struct s_data{
 typedef struct s_philo{
 	t_data	*data;
 	long	last_meal;
+	int		number_of_meals;
 	int		philo_matricule;
 }	t_philo;
 

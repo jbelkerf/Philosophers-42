@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:04:30 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/18 11:08:10 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/18 15:23:29 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	philo_eat(t_philo *philo)
 	struct timeval	time_now;
 
 	printf("%ld %d is eating\n", get_timestamp(philo), philo->philo_matricule);
+	philo->number_of_meals++;
 	usleep(philo->data->time_to_eat * 1000);
 	gettimeofday(&time_now, NULL);
 	philo->last_meal = time_now.tv_usec;
