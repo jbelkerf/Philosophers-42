@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:04:30 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/19 15:39:10 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/19 17:38:52 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void	philo_think(t_philo *philo)
 	printf("%ld %d is thinking\n", get_timestamp(philo), philo->philo_matricule);
 }
 
-void	give_fork(t_mutex *fork)
+void	give_forks(t_mutex *first_fork, t_mutex *second_fork)
 {
-	pthread_mutex_unlock(fork);
+	pthread_mutex_unlock(first_fork);
+	pthread_mutex_unlock(second_fork);
 }

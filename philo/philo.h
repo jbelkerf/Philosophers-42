@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 15:44:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/19 14:54:07 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/19 17:39:19 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,33 @@ typedef struct s_data{
 }	t_data;
 
 typedef struct s_philo{
-	t_data	*data;
-	long	last_meal;
-	int		number_of_meals;
-	int		philo_matricule;
+	t_data			*data;
+	pthread_mutex_t *first_fork;
+	pthread_mutex_t	*second_fork;
+	long			last_meal;
+	int				number_of_meals;
+	int				philo_matricule;
 }	t_philo;
 
 typedef pthread_mutex_t	t_mutex;
 
+
+//* SIMULATION
+void	start_simulation(t_philo *philos);
+void	*routine(void *param);
+
+
+//* PHILO ACTION
+void	take_fork(t_mutex *fork, t_philo *philo);
+void	philo_eat(t_philo *philo);
+void	give_forks(t_mutex *first_fork, t_mutex *second_fork);
+void	philo_sleep(t_philo *philo);
+void	philo_think(t_philo *philo);
+void	*die(t_philo *philo);
+
 //* ATOI
 int		ft_atoi(char *str);
 
-//* ROUTINE
-void	*routine(void *param);
 
 //* INITAILIZE DATA
 t_philo	*initialize_philos(t_data *data);
@@ -61,22 +75,9 @@ t_data	*initialize_data(int ac, char **av);
 void	non_valid_arguments(char ac);
 void	print_philos(t_philo *philo);
 
-//* LOG PHILO
-void	log_philo(int philo_matricule, pthread_mutex_t *print_mutex);
 
 //* FORKS
-void	set_forks(pthread_mutex_t *f, pthread_mutex_t *s, t_philo *philo);
-void	take_fork(t_mutex *fork, t_philo *philo);
-void	give_fork(t_mutex *fork);
-
-//* THINK
-void	philo_think(t_philo *philo);
-
-//* SLEEP
-void	philo_sleep(t_philo *philo);
-
-//* EAT
-void	philo_eat(t_philo *philo);
+void	set_forks(t_mutex *f, t_mutex *s, t_philo *philo);
 
 //* DIE
 int		check_die(t_philo *philo);
