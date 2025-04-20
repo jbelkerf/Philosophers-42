@@ -6,27 +6,13 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 13:17:13 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/20 12:42:27 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/20 13:41:38 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	print_philos(t_philo *philo)
-{
-	int	i;
 
-	i = 0;
-	while (i < philo[0].data->number_of_philos)
-	{
-		printf("\n\n---> %d\n", philo[i].philo_matricule);
-		printf("Time to die: %d\n", philo[i].data->time_to_die);
-		printf("Time to eat: %d\n", philo[i].data->time_to_eat);
-		printf("Time to sleep: %d\n", philo[i].data->time_to_sleep);
-		printf("Optional: %d\n", philo[i].data->optional);
-		i++;
-	}
-}
 
 t_data	*initialize_data(int ac, char **av)
 {

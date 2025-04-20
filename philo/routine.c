@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:04:30 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/20 12:49:32 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/20 13:25:09 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ void	philo_eat(t_philo *philo)
 	printf("%ld %d is eating\n", get_timestamp(philo), philo->philo_matricule);
 	pthread_mutex_unlock(&(philo->data->print));
 	philo->number_of_meals++;
-	usleep(philo->data->time_to_eat * 1000);
 	gettimeofday(&time_now, NULL);
 	philo->last_meal = (time_now.tv_usec / 1000) + (time_now.tv_sec * 1000);
+	precise_sleep(philo->data->time_to_eat * 1000);
 }
 
 void	philo_sleep(t_philo *philo)
@@ -51,7 +51,7 @@ void	philo_sleep(t_philo *philo)
 	pthread_mutex_lock(&(philo->data->print));
 	printf("%ld %d is sleeping\n", get_timestamp(philo), philo->philo_matricule);
 	pthread_mutex_unlock(&(philo->data->print));
-	usleep(philo->data->time_to_sleep * 1000);
+	precise_sleep(philo->data->time_to_sleep * 1000);
 }
 
 void	philo_think(t_philo *philo)
