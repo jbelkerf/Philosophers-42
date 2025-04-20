@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 15:44:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/19 20:55:50 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/20 12:41:51 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef pthread_mutex_t	t_mutex;
 
 typedef struct	s_fork{
 	int		number;
-	t_mutex	fork;
+	t_mutex	*fork;
 }	t_fork;
 
 typedef struct s_flag{
@@ -36,7 +36,7 @@ typedef struct s_flag{
 
 typedef struct s_data{
 	pthread_mutex_t	print;
-	t_fork			*forks;
+	t_mutex			*forks;
 	int				number_of_philos;
 	t_flag			death_spreed;
 	int				time_to_die;

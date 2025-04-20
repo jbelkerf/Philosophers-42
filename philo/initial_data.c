@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 13:17:13 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/19 20:45:30 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/20 12:42:27 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,10 @@ t_data	*initialize_data(int ac, char **av)
 	i = 0;
 	data->tids = malloc(data->number_of_philos * sizeof(pthread_t));
 	pthread_mutex_init(&(data->death_spreed.mutex), NULL);
-	data->forks = malloc(data->number_of_philos * sizeof(t_fork));
+	data->forks = malloc(data->number_of_philos * sizeof(t_mutex));
 	while (i < data->number_of_philos)
 	{
-		data->forks[i].number = i;
-		pthread_mutex_init(&(data->forks[i].fork), NULL);
+		pthread_mutex_init(&(data->forks[i]), NULL);
 		i++;
 	}
 	return (data);
@@ -71,7 +70,7 @@ t_philo	*initialize_philos(t_data *data)
 		philos[i].philo_matricule = i;
 		philos[i].last_meal = 0;
 		philos[i].number_of_meals = 0;
-		set_forks(&philos[i]); //! here the segvault
+		set_forks(&philos[i]);
 		i++;
 	}
 	return (philos);

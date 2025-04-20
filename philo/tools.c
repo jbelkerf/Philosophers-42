@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:14:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/19 20:48:37 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/20 12:46:13 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,18 @@ void	set_forks(t_philo *philo)
 	int	philo_num;
 
 	philo_num = philo->philo_matricule;
-	printf("here\n");
-	philo->first_fork = philo->data->forks[philo_num];
+	philo->first_fork.fork = &(philo->data->forks[philo_num]);
+	philo->first_fork.number = philo_num;
 	if (philo_num == philo->data->number_of_philos - 1)
-		philo->second_fork = philo->data->forks[0];
+	{
+		philo->second_fork.fork = &(philo->data->forks[0]);
+		philo->second_fork.number = 0;
+	}
 	else
-		philo->second_fork = philo->data->forks[philo_num + 1];
+	{
+		philo->second_fork.fork = &(philo->data->forks[philo_num + 1]);
+		philo->second_fork.number = philo_num + 1;
+	}
 }
 
 int	check_die(t_philo *philo)

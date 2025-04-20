@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:22:08 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/19 15:55:59 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/20 11:46:13 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ int	main(int ac, char **av)
 
 	non_valid_arguments(ac);
 	philos = initialize_philos(initialize_data(ac, av));
+	// return 0;//!to be removed
 	start_simulation(philos);
 }

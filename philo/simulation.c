@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 15:55:02 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/19 20:54:12 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/20 12:08:02 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,13 @@ void	*routine(void *param)
 	philo->last_meal = (time_now.tv_sec * 1000) + (time_now.tv_usec / 1000);
 	while (1337)
 	{
-		take_fork(philo);//  * TAKE FORKs
-		printf("%d f1%p f2%p\n", philo->philo_matricule, philo->first_fork, philo->second_fork);
+		take_fork(philo);//  * TAKE FORKs 
 		if (check_die(philo))
 			return (die(philo));
-		philo_eat(philo);//  			       * EAT
-		give_forks(philo);//         * GIVE FORKS
-		philo_sleep(philo);//         * SLEEP
-		philo_think(philo);//         * THINK
+		philo_eat(philo);//				* EAT
+		give_forks(philo);//			* GIVE FORKS
+		philo_sleep(philo);//	   		* SLEEP
+		philo_think(philo);//         	* THINK
 		if (check_die(philo))
 			return (die(philo));
 	}
