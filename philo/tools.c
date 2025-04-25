@@ -6,11 +6,12 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:14:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/25 13:04:31 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/25 15:50:10 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
 
 int	check_optional(t_philo *philos)
 {

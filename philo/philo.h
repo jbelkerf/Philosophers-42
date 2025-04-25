@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 15:44:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/20 13:28:53 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/25 15:47:42 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 typedef pthread_mutex_t	t_mutex;
 
-typedef struct	s_fork{
+typedef struct s_fork{
 	int		number;
 	t_mutex	*fork;
 }	t_fork;
