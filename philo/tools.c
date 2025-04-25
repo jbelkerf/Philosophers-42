@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:14:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/20 13:43:53 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/25 13:04:31 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,18 @@ void	set_forks(t_philo *philo)
 
 void	precise_sleep(time_t time_to_wait)
 {
-	time_t	time;
-	int		scale;
+	time_t			start;
+	time_t			current;
+	struct timeval	s_start;
+	struct timeval	s_current;
 
-	time = 0;
-	scale = 100;
-	while (time < time_to_wait)
+	gettimeofday(&s_current, NULL);
+	current = s_current.tv_sec * 1000 + s_current.tv_usec / 1000;
+	start = current;
+	while (current < start + time_to_wait)
 	{
-		usleep(scale);
-		time += scale;
+		usleep(100);
+		gettimeofday(&s_current, NULL);
+		current = s_current.tv_sec * 1000 + s_current.tv_usec / 1000;
 	}
 }
