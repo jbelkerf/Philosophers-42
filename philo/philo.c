@@ -6,25 +6,23 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:22:08 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/26 15:49:17 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/26 16:08:02 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void f()
-{
-	system("leaks philo");
-}
+
 
 int	main(int ac, char **av)
 {
 	t_philo	*philos;
 
-	atexit(f);
 	if (non_valid_arguments(av, ac))
 		return (1);
 	philos = initialize_philos(initialize_data(ac, av));
+	if (!philos)
+		return (NULL);
 	start_simulation(philos);
 	free_resources(philos);
 }

@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 13:17:13 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/26 15:42:05 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/26 16:07:00 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ t_data	*initialize_data(int ac, char **av)
 	t_data	*data;
 	int		i;
 
-	data = malloc(sizeof(t_data));//! FREE
+	data = malloc(sizeof(t_data));
+	if (!data)
+		return (NULL);
 	data->death_spreed.value = 0;
 	data->start_time = 0;
 	data->number_of_philos = ft_atoi(av[1]);
@@ -30,9 +32,13 @@ t_data	*initialize_data(int ac, char **av)
 		data->optional = -1;
 	pthread_mutex_init(&(data->print), NULL);
 	i = 0;
-	data->tids = malloc(data->number_of_philos * sizeof(pthread_t));//! FREE
+	data->tids = malloc(data->number_of_philos * sizeof(pthread_t));
+	if (!data->tids)
+		return (NULL);
 	pthread_mutex_init(&(data->death_spreed.mutex), NULL);
-	data->forks = malloc(data->number_of_philos * sizeof(t_mutex));//! FREE
+	data->forks = malloc(data->number_of_philos * sizeof(t_mutex));
+	if (!data->forks)
+		return (NULL);
 	while (i < data->number_of_philos)
 	{
 		pthread_mutex_init(&(data->forks[i]), NULL);
@@ -47,7 +53,9 @@ t_philo	*initialize_philos(t_data *data)
 	int		i;
 
 	i = 0;
-	philos = malloc(data->number_of_philos * sizeof(t_philo));//! FREE
+	philos = malloc(data->number_of_philos * sizeof(t_philo));
+	if (!philos)
+		return (NULL);
 	data->philos = philos;
 	while (i < data->number_of_philos)
 	{

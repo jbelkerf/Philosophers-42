@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 13:39:13 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/26 13:44:13 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/26 15:59:47 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,10 @@ int	non_valid_arguments(char **av, int ac)
 			return (1);
 		}
 		i++;
+	}
+	if (ft_atoi(av[1]) > 200)
+	{
+		return (printf("\033[0;31mnumber of philos is more than 200\n"), 1);
 	}
 	return (0);
 }
