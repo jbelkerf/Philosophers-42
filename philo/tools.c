@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:14:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/26 12:36:53 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/26 13:43:58 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,17 @@ void	set_forks(t_philo *philo)
 	}
 }
 
-
 void	precise_sleep(time_t time_to_wait)
 {
 	time_t			start;
 	time_t			current;
-	struct timeval	s_start;
-	struct timeval	s_current;
 
-	gettimeofday(&s_current, NULL);
-	current = s_current.tv_sec * 1000 + s_current.tv_usec / 1000;
+	current = get_current_time();
 	start = current;
 	while (current < start + time_to_wait)
 	{
 		usleep(100);
-		gettimeofday(&s_current, NULL);
-		current = s_current.tv_sec * 1000 + s_current.tv_usec / 1000;
+		current = get_current_time();
 	}
 }
 
@@ -65,70 +60,29 @@ time_t	get_current_time(void)
 	return (result);
 }
 
-int	dead_spreed(t_data *data)
+int	ft_atoi(char *str)
 {
-	pthread_mutex_lock(&(data->death_spreed.mutex));
-	if (data->death_spreed.value)
+	long int	n;
+	int			sign;
+
+	n = 0;
+	sign = 1;
+	while (*str == ' ' || (*str >= 9 && *str <= 13))
+		str++;
+	if (*str == '-' || *str == '+')
 	{
-		pthread_mutex_unlock(&(data->death_spreed.mutex));
-		return (1);
+		if (*str == '-')
+			sign *= -1;
+		str++;
 	}
-	pthread_mutex_unlock(&(data->death_spreed.mutex));
-	return (0);
-}
-
-int	time_is_over(t_philo *philo)
-{
-	time_t	time_to_die;
-	time_t	time_last_meal;
-	time_t	current_time;
-
-	current_time = get_current_time();
-	time_to_die = philo->data->time_to_die;
-	time_last_meal = current_time - philo->last_meal;
-	if (time_last_meal >= time_to_die)
+	while (*str >= '0' && *str <= '9')
 	{
-		pthread_mutex_lock(&(philo->data->death_spreed.mutex));
-		philo->data->death_spreed.value = 1;
-		die(philo);
-		pthread_mutex_unlock(&(philo->data->death_spreed.mutex));
-		return (1);
-	}
-	return (0);
-}
-
-int	max_meals(t_philo *philos)
-{
-	int	i;
-	int	max_meals;
-	int	philos_number;
-
-	if (philos[0].data->optional == -1)
-		return (0);
-	i = 0;
-	max_meals = philos[0].data->optional;
-	while (i < philos_number)
-	{
-		if (philos[i].number_of_meals < max_meals)
+		n = n * 10 + (*str - '0');
+		str++;
+		if (n < 0 && sign == -1)
 			return (0);
-		i++;
+		else if (n < 0 && sign == 1)
+			return (-1);
 	}
-	return (1);
-}
-
-int	should_stoped(t_philo *philo)
-{
-	t_philo	*philos;
-
-	philos = philo->data->philos;
-	//! dead spreed
-	if (dead_spreed(philo->data))
-		return (1);
-	//! time over
-	if (time_is_over(philo))
-		return (1);
-	//! over meal
-	if (max_meals(philo->data->philos))
-		return (1);
-	return (0);
+	return ((int)(sign * n));
 }

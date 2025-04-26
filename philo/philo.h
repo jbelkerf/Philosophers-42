@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 15:44:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/26 12:33:59 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/26 13:46:48 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,17 @@ typedef struct s_philo{
 	int				philo_matricule;
 }	t_philo;
 
-
 //* SIMULATION
 void	start_simulation(t_philo *philos);
 void	*routine(void *param);
 
 //* PHILO ACTION
-void	take_fork(t_philo *philo);
-void	philo_eat(t_philo *philo);
+void	take_forks(t_philo *philo);
+void	ft_eat(t_philo *philo);
 void	give_forks(t_philo *philo);
-void	philo_sleep(t_philo *philo);
+void	ft_sleep(t_philo *philo);
 void	precise_sleep(time_t time_to_wait);
-void	philo_think(t_philo *philo);
+void	ft_think(t_philo *philo);
 void	*die(t_philo *philo);
 
 //* ATOI
@@ -90,7 +89,6 @@ long	get_timestamp(t_philo *philo);
 
 //* TOOLS
 time_t	get_current_time(void);
-
 
 //* STOP SIMULATION
 int		should_stoped(t_philo *philo);

@@ -6,16 +6,18 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:04:30 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/26 12:35:28 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/26 13:47:02 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	take_fork(t_philo *philo)
+void	take_forks(t_philo *philo)
 {
 	int	matricule;
 
+	if (should_stoped(philo))
+		return ;
 	matricule = philo->philo_matricule;
 	if (matricule % 2 == 0)
 	{
@@ -33,10 +35,12 @@ void	take_fork(t_philo *philo)
 	}
 }
 
-void	philo_eat(t_philo *philo)
+void	ft_eat(t_philo *philo)
 {
 	struct timeval	time_now;
 
+	if (should_stoped(philo))
+		return ;
 	pthread_mutex_lock(&(philo->data->print));
 	printf("%ld %d is eating\n", get_timestamp(philo), philo->philo_matricule);
 	pthread_mutex_unlock(&(philo->data->print));
@@ -46,16 +50,20 @@ void	philo_eat(t_philo *philo)
 	philo->number_of_meals++;
 }
 
-void	philo_sleep(t_philo *philo)
+void	ft_sleep(t_philo *philo)
 {
+	if (should_stoped(philo))
+		return ;
 	pthread_mutex_lock(&(philo->data->print));
 	printf("%ld %d is sleeping\n", get_timestamp(philo), philo->philo_matricule);
 	pthread_mutex_unlock(&(philo->data->print));
 	precise_sleep(philo->data->time_to_sleep);
 }
 
-void	philo_think(t_philo *philo)
+void	ft_think(t_philo *philo)
 {
+	if (should_stoped(philo))
+		return ;
 	pthread_mutex_lock(&(philo->data->print));
 	printf("%ld %d is thinking\n", get_timestamp(philo), philo->philo_matricule);
 	pthread_mutex_unlock(&(philo->data->print));
