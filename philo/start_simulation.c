@@ -6,11 +6,18 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 13:36:15 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/26 13:42:11 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/26 15:19:58 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	log_routine(t_philo *philo, char *action)
+{
+	pthread_mutex_lock(&(philo->data->print));
+	printf("%ld %d %s\n", get_timestamp(philo), philo->philo_matricule, action);
+	pthread_mutex_unlock(&(philo->data->print));
+}
 
 void	*routine(void *param)
 {

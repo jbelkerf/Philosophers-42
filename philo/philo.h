@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 15:44:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/26 13:46:48 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/26 15:41:04 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	ft_sleep(t_philo *philo);
 void	precise_sleep(time_t time_to_wait);
 void	ft_think(t_philo *philo);
 void	*die(t_philo *philo);
+void	log_routine(t_philo *philo, char *action);
 
 //* ATOI
 int		ft_atoi(char *str);
@@ -81,9 +82,6 @@ int		non_valid_arguments(char **av, int ac);
 //* FORKS
 void	set_forks(t_philo *philo);
 
-//* DIE
-int		check_die(t_philo *philo);
-
 //* TIME
 long	get_timestamp(t_philo *philo);
 
@@ -92,5 +90,8 @@ time_t	get_current_time(void);
 
 //* STOP SIMULATION
 int		should_stoped(t_philo *philo);
+
+//* FREE RESOURCES
+void	free_resources(t_philo *philos);
 
 #endif
