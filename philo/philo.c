@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:22:08 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/20 13:48:58 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/26 12:38:50 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,16 @@ void	*routine(void *param)
 	while (1337)
 	{
 		take_fork(philo);//  * TAKE FORKs 
-		if (check_die(philo))
-		{
-			give_forks(philo);
-			return (die(philo));
-		}
+		// if (should_stoped(philo))
+		// 	return (NULL);
 		philo_eat(philo);//				* EAT
 		give_forks(philo);//			* GIVE FORKS
 		philo_sleep(philo);//	   		* SLEEP
 		philo_think(philo);//         	* THINK
-		if (check_die(philo))
-			return (die(philo));
+	// 	if (should_stoped(philo))
+	// 		return (NULL);
 	}
+	return (NULL);
 }
 
 void	start_simulation(t_philo *philos)
@@ -75,7 +73,8 @@ int	main(int ac, char **av)
 {
 	t_philo	*philos;
 
-	non_valid_arguments(ac);
+	if (non_valid_arguments(av, ac))
+		return (1);
 	philos = initialize_philos(initialize_data(ac, av));
 	start_simulation(philos);
 }

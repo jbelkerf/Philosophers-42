@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 15:44:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/25 15:47:42 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/26 12:33:59 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,13 @@ typedef struct s_data{
 	t_mutex			*forks;
 	int				number_of_philos;
 	t_flag			death_spreed;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
+	time_t			time_to_die;
+	time_t			time_to_eat;
+	time_t			time_to_sleep;
 	int				optional;
 	time_t			start_time;
 	pthread_t		*tids;
+	void			*philos;
 }	t_data;
 
 typedef struct s_philo{
@@ -55,6 +56,7 @@ typedef struct s_philo{
 	int				number_of_meals;
 	int				philo_matricule;
 }	t_philo;
+
 
 //* SIMULATION
 void	start_simulation(t_philo *philos);
@@ -75,8 +77,7 @@ int		ft_atoi(char *str);
 //* INITAILIZE DATA
 t_philo	*initialize_philos(t_data *data);
 t_data	*initialize_data(int ac, char **av);
-void	non_valid_arguments(char ac);
-void	print_philos(t_philo *philo);
+int		non_valid_arguments(char **av, int ac);
 
 //* FORKS
 void	set_forks(t_philo *philo);
@@ -86,5 +87,12 @@ int		check_die(t_philo *philo);
 
 //* TIME
 long	get_timestamp(t_philo *philo);
+
+//* TOOLS
+time_t	get_current_time(void);
+
+
+//* STOP SIMULATION
+int		should_stoped(t_philo *philo);
 
 #endif

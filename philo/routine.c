@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:04:30 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/25 13:03:06 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/26 12:35:28 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	take_fork(t_philo *philo)
 	int	matricule;
 
 	matricule = philo->philo_matricule;
-	if (matricule % 2 == 0 )
+	if (matricule % 2 == 0)
 	{
 		pthread_mutex_lock(philo->first_fork.fork);
 		printf("%ld %d has taken a fork\n", get_timestamp(philo), matricule);

@@ -6,7 +6,7 @@
 #    By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/17 16:30:24 by jbelkerf          #+#    #+#              #
-#    Updated: 2025/04/20 13:34:00 by jbelkerf         ###   ########.fr        #
+#    Updated: 2025/04/26 11:28:58 by jbelkerf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ m: $(MAN_SRC) $(HEADER)
 	$(CC) $(CFLAGS) $(MAN_SRC) $(SANITIZE_MEMORY) -o $(NAME)
 	
 t: $(MAN_SRC) $(HEADER)
-	$(CC) $(CFLAGS) $(MAN_SRC) $(SANITIZE_MEMORY) -o $(NAME)
+	$(CC) $(CFLAGS) $(MAN_SRC) $(SANITIZE_THREAD) -o $(NAME)
 
 clean:
 	rm -f $(NAME)

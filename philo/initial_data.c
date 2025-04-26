@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 13:17:13 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/20 13:41:38 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/26 11:57:06 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ t_philo	*initialize_philos(t_data *data)
 
 	i = 0;
 	philos = malloc(data->number_of_philos * sizeof(t_philo));
+	data->philos = philos;
 	while (i < data->number_of_philos)
 	{
 		philos[i].data = data;
@@ -62,14 +63,50 @@ t_philo	*initialize_philos(t_data *data)
 	return (philos);
 }
 
-void	non_valid_arguments(char ac)
+int	ft_isdigit(char c)
 {
+	return (c <= '9' && c >= '0');
+}
+
+int	is_valide_number(char *arg)
+{
+	int	i;
+
+	i = 0;
+	if (arg[i] == '+')
+		i++;
+	if (!ft_isdigit(arg[i]))
+		return (0);
+	while (ft_isdigit(arg[i]))
+	{
+		i++;
+	}
+	if (arg[i] == '\0')
+		return (1);
+	return (0);
+}
+
+int	non_valid_arguments(char **av, int ac)
+{
+	int	i;
+
+	i = 2;
 	if (ac != 5 && ac != 6)
 	{
 		printf("\033[0;31mUsage Eroor!\n");
 		printf("\033[38;5;208mHow to use:\n\tphilo number_of_philosophers time_");
 		printf("\033[38;5;208mto_die time_to_eat time_to_sleep [number_of_");
 		printf("\033[38;5;208mtimes_each_philosopher_must_eat]\n");
-		exit(1);
+		return (1);
 	}
+	while (i < ac)
+	{
+		if (!is_valide_number(av[i]))
+		{
+			printf("\033[0;31m%s is non valide number\n", av[i]);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
 }
