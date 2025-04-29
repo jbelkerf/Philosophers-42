@@ -6,18 +6,12 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 12:41:17 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/29 12:21:05 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/29 18:30:13 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*die(t_philo *philo)
-{
-	log_routine(philo, "died\n");
-	printf("%ld %d died\n", get_timestamp(philo), philo->philo_matricule);
-	return (NULL);
-}
 
 int	dead_spreed(t_data *data)
 {
@@ -31,27 +25,6 @@ int	dead_spreed(t_data *data)
 	return (0);
 }
 
-int	time_is_over(t_philo *philo)
-{
-	time_t	time_to_die;
-	time_t	time_last_meal;
-	time_t	current_time;
-
-	current_time = get_current_time();
-	time_to_die = philo->data->time_to_die;
-	time_last_meal = current_time - philo->last_meal;
-	if (time_last_meal > time_to_die)
-	{
-		lock(&(philo->data->death_spreed.mutex));
-		philo->data->death_spreed.value = 1;
-		unlock(&(philo->data->death_spreed.mutex));
-		lock(&(philo->data->print));
-		printf("%ld %d died\n", get_timestamp(philo), philo->philo_matricule);
-		unlock(&(philo->data->print));
-		return (1);
-	}
-	return (0);
-}
 
 int	max_meals(t_philo *philos)
 {
@@ -79,10 +52,6 @@ int	should_stoped(t_philo *philo)
 
 	philos = philo->data->philos;
 	if (dead_spreed(philo->data))
-		return (1);
-	if (time_is_over(philo))
-		return (1);
-	if (max_meals(philo->data->philos))
 		return (1);
 	return (0);
 }

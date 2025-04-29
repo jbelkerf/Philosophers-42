@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 15:44:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/29 12:16:54 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/29 20:14:28 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct s_philo{
 	t_data			*data;
 	t_fork			first_fork;
 	t_fork			second_fork;
-	long			last_meal;
+	t_flag			last_meal;
 	int				number_of_meals;
 	int				philo_matricule;
 }	t_philo;
@@ -68,7 +68,7 @@ void	give_forks(t_philo *philo);
 void	ft_sleep(t_philo *philo);
 void	precise_sleep(time_t time_to_wait);
 void	ft_think(t_philo *philo);
-void	*die(t_philo *philo);
+void	die(t_philo *philo);
 void	log_routine(t_philo *philo, char *action);
 
 //* ATOI
@@ -87,12 +87,16 @@ long	get_timestamp(t_philo *philo);
 
 //* TOOLS
 time_t	get_current_time(void);
+int		max_meals(t_philo *philos);
 
 //* STOP SIMULATION
 int		should_stoped(t_philo *philo);
 
 //* FREE RESOURCES
 void	free_resources(t_philo *philos);
+
+//* MOUNITOR
+void	*monitor(void *arg);
 
 //* MUTEX HANDING
 void	lock(t_mutex *mutex);

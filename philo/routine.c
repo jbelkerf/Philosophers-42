@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:04:30 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/29 12:20:35 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/29 20:18:12 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ void	ft_eat(t_philo *philo)
 	if (should_stoped(philo))
 		return ;
 	log_routine(philo, "is eating");
-	philo->last_meal = get_current_time();
+	lock(&(philo->last_meal.mutex));
+	philo->last_meal.value = get_current_time();
+	unlock(&(philo->last_meal.mutex));
 	precise_sleep(philo->data->time_to_eat);
 	philo->number_of_meals++;
 }
