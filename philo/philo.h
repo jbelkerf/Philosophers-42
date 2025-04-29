@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 15:44:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/26 15:41:04 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/29 11:42:51 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_flag{
 }	t_flag;
 
 typedef struct s_data{
-	pthread_mutex_t	print;
+	t_mutex			print;
 	t_mutex			*forks;
 	int				number_of_philos;
 	t_flag			death_spreed;

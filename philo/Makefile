@@ -6,7 +6,7 @@
 #    By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/17 16:30:24 by jbelkerf          #+#    #+#              #
-#    Updated: 2025/04/26 15:47:12 by jbelkerf         ###   ########.fr        #
+#    Updated: 2025/04/29 11:45:31 by jbelkerf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ CFLAGS=  -pthread
 HEADER= philo.h
 
 MAN_SRC=  philo.c initial_data.c tools.c routine.c stop_simulation.c start_simulation.c \
-valid_argument.c free_resource.c
+valid_argument.c free_resource.c monitor.c
 
 all: $(MAN_SRC) $(HEADER)
 	$(CC) $(CFLAGS) $(MAN_SRC) -o $(NAME)
