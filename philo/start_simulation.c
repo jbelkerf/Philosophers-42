@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 13:36:15 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/29 20:17:06 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/29 20:32:48 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ void	*routine(void *param)
 	t_philo			*philo;
 
 	philo = param;
+	lock(&(philo->last_meal.mutex));
 	philo->last_meal.value = get_current_time();
+	unlock(&(philo->last_meal.mutex));
 	while (1337)
 	{
 		take_forks(philo);
