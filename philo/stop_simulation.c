@@ -6,12 +6,11 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 12:41:17 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/29 18:30:13 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/29 20:37:53 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
 
 int	dead_spreed(t_data *data)
 {
@@ -24,7 +23,6 @@ int	dead_spreed(t_data *data)
 	unlock(&(data->death_spreed.mutex));
 	return (0);
 }
-
 
 int	max_meals(t_philo *philos)
 {

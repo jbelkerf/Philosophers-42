@@ -6,13 +6,11 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:22:08 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/29 11:45:53 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/29 20:37:39 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-
 
 int	main(int ac, char **av)
 {
