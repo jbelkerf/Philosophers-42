@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:04:30 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/26 15:24:09 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/29 12:20:35 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,16 @@ void	take_forks(t_philo *philo)
 	matricule = philo->philo_matricule;
 	if (matricule % 2 == 0)
 	{
-		pthread_mutex_lock(philo->first_fork.fork);
+		lock(philo->first_fork.fork);
 		log_routine(philo, "has taken a fork");
-		pthread_mutex_lock(philo->second_fork.fork);
+		lock(philo->second_fork.fork);
 		log_routine(philo, "has taken a fork");
 	}
 	else
 	{
-		pthread_mutex_lock(philo->second_fork.fork);
+		lock(philo->second_fork.fork);
 		log_routine(philo, "has taken a fork");
-		pthread_mutex_lock(philo->first_fork.fork);
+		lock(philo->first_fork.fork);
 		log_routine(philo, "has taken a fork");
 	}
 }
@@ -62,6 +62,6 @@ void	ft_think(t_philo *philo)
 
 void	give_forks(t_philo *philo)
 {
-	pthread_mutex_unlock(philo->first_fork.fork);
-	pthread_mutex_unlock(philo->second_fork.fork);
+	unlock(philo->first_fork.fork);
+	unlock(philo->second_fork.fork);
 }

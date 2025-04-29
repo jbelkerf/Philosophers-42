@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 15:44:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/29 11:42:51 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/29 12:16:54 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,9 @@ int		should_stoped(t_philo *philo);
 
 //* FREE RESOURCES
 void	free_resources(t_philo *philos);
+
+//* MUTEX HANDING
+void	lock(t_mutex *mutex);
+void	unlock(t_mutex *mutex);
 
 #endif

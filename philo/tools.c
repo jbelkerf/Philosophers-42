@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:14:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/26 15:17:00 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/29 12:16:48 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,3 +86,13 @@ int	ft_atoi(char *str)
 	}
 	return ((int)(sign * n));
 }
+
+void	lock(t_mutex *mutex)
+{
+	pthread_mutex_lock(mutex);
+}
+void	unlock(t_mutex *mutex)
+{
+	pthread_mutex_unlock(mutex);
+}
+

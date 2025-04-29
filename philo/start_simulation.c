@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 13:36:15 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/26 15:19:58 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/29 12:24:44 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,16 @@
 
 void	log_routine(t_philo *philo, char *action)
 {
-	pthread_mutex_lock(&(philo->data->print));
+	lock(&(philo->data->death_spreed.mutex));
+	if (philo->data->death_spreed.value)
+	{
+		unlock(&(philo->data->death_spreed.mutex));
+		return ;
+	}
+	unlock(&(philo->data->death_spreed.mutex));
+	lock(&(philo->data->print));
 	printf("%ld %d %s\n", get_timestamp(philo), philo->philo_matricule, action);
-	pthread_mutex_unlock(&(philo->data->print));
+	unlock(&(philo->data->print));
 }
 
 void	*routine(void *param)
@@ -28,17 +35,17 @@ void	*routine(void *param)
 	while (1337)
 	{
 		take_forks(philo);
-		if (should_stoped(philo))
-		{
-			give_forks(philo);
-			break ;
-		}
 		ft_eat(philo);
 		give_forks(philo);
 		ft_sleep(philo);
 		ft_think(philo);
-		if (should_stoped(philo))
-			break ;
+		lock(&(philo->data->death_spreed.mutex));
+		if (philo->data->death_spreed.value)
+		{
+			unlock(&(philo->data->death_spreed.mutex));
+			return (NULL);
+		}
+		unlock(&(philo->data->death_spreed.mutex));
 	}
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 12:41:17 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/26 13:48:02 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/04/29 12:21:05 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,20 @@
 
 void	*die(t_philo *philo)
 {
+	log_routine(philo, "died\n");
 	printf("%ld %d died\n", get_timestamp(philo), philo->philo_matricule);
 	return (NULL);
 }
 
 int	dead_spreed(t_data *data)
 {
-	pthread_mutex_lock(&(data->death_spreed.mutex));
+	lock(&(data->death_spreed.mutex));
 	if (data->death_spreed.value)
 	{
-		pthread_mutex_unlock(&(data->death_spreed.mutex));
+		unlock(&(data->death_spreed.mutex));
 		return (1);
 	}
-	pthread_mutex_unlock(&(data->death_spreed.mutex));
+	unlock(&(data->death_spreed.mutex));
 	return (0);
 }
 
@@ -41,10 +42,12 @@ int	time_is_over(t_philo *philo)
 	time_last_meal = current_time - philo->last_meal;
 	if (time_last_meal > time_to_die)
 	{
-		pthread_mutex_lock(&(philo->data->death_spreed.mutex));
+		lock(&(philo->data->death_spreed.mutex));
 		philo->data->death_spreed.value = 1;
-		die(philo);
-		pthread_mutex_unlock(&(philo->data->death_spreed.mutex));
+		unlock(&(philo->data->death_spreed.mutex));
+		lock(&(philo->data->print));
+		printf("%ld %d died\n", get_timestamp(philo), philo->philo_matricule);
+		unlock(&(philo->data->print));
 		return (1);
 	}
 	return (0);
