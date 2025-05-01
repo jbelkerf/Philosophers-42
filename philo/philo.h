@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 15:44:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/29 20:14:28 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/01 13:46:01 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_philo{
 	t_fork			first_fork;
 	t_fork			second_fork;
 	t_flag			last_meal;
-	int				number_of_meals;
+	t_flag			number_of_meals;
 	int				philo_matricule;
 }	t_philo;
 
@@ -101,5 +101,10 @@ void	*monitor(void *arg);
 //* MUTEX HANDING
 void	lock(t_mutex *mutex);
 void	unlock(t_mutex *mutex);
+
+//* SETTER GETTER
+long	getter(t_flag *flag);
+void	setter(t_flag *flag, long value);
+void	increment_flag(t_flag *flag);
 
 #endif

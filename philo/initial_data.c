@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 13:17:13 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/29 20:15:34 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/01 13:36:28 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ t_philo	*initialize_philos(t_data *data)
 		philos[i].philo_matricule = i;
 		philos[i].last_meal.value = 0;
 		pthread_mutex_init(&(philos[i].last_meal.mutex), NULL);
-		philos[i].number_of_meals = 0;
+		pthread_mutex_init(&(philos[i].number_of_meals.mutex), NULL);
+		philos[i].number_of_meals.value = 0;
 		set_forks(&philos[i]);
 		i++;
 	}

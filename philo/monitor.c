@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:32:23 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/29 20:38:45 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/01 13:17:03 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,7 @@ void	*monitor(void *arg)
 		i = 0;
 		while (i < number_of_philos)
 		{
-			lock(&(philos[i].last_meal.mutex));
-			last_meal = get_current_time() - philos[i].last_meal.value;
-			unlock(&(philos[i].last_meal.mutex));
+			last_meal = get_current_time() -  getter(&(philos[i].last_meal));
 			if (last_meal > to_die)
 				return (die(&philos[i]), NULL);
 			if (max_meals(philos))
