@@ -6,20 +6,14 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 13:17:13 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/01 13:36:28 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/01 14:34:22 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-t_data	*initialize_data(int ac, char **av)
+t_data	*set_input(t_data	*data, int ac, char **av)
 {
-	t_data	*data;
-	int		i;
-
-	data = malloc(sizeof(t_data));
-	if (!data)
-		return (NULL);
 	data->death_spreed.value = 0;
 	data->start_time = 0;
 	data->number_of_philos = ft_atoi(av[1]);
@@ -30,6 +24,18 @@ t_data	*initialize_data(int ac, char **av)
 		data->optional = ft_atoi(av[5]);
 	else
 		data->optional = -1;
+	return (data);
+}
+
+t_data	*initialize_data(int ac, char **av)
+{
+	t_data	*data;
+	int		i;
+
+	data = malloc(sizeof(t_data));
+	if (!data)
+		return (NULL);
+	data = set_input(data, ac, av);
 	pthread_mutex_init(&(data->print), NULL);
 	i = 0;
 	data->tids = malloc(data->number_of_philos * sizeof(pthread_t));
