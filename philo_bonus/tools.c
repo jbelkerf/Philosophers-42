@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:14:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/29 20:38:17 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/09 17:14:50 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,7 @@ time_t	get_timestamp(t_philo *philo)
 	return (get_current_time() - philo->data->start_time);
 }
 
-void	set_forks(t_philo *philo)
-{
-	int	philo_num;
 
-	philo_num = philo->philo_matricule;
-	philo->first_fork.fork = &(philo->data->forks[philo_num]);
-	philo->first_fork.number = philo_num;
-	if (philo_num == philo->data->number_of_philos - 1)
-	{
-		philo->second_fork.fork = &(philo->data->forks[0]);
-		philo->second_fork.number = 0;
-	}
-	else
-	{
-		philo->second_fork.fork = &(philo->data->forks[philo_num + 1]);
-		philo->second_fork.number = philo_num + 1;
-	}
-}
 
 void	precise_sleep(time_t time_to_wait)
 {

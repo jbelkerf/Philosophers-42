@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 13:36:15 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/09 16:52:44 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/09 18:24:29 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,19 @@
 
 void	log_routine(t_philo *philo, char *action)
 {
-	if (getter(&(philo->data->death_spreed)))
+	if (get_sem_value(&(philo->data->death_spreed)))
 		return ;
 	sem_wait(philo->data->print.sem);
 	printf("%ld %d %s\n", get_timestamp(philo), philo->philo_matricule, action);
 	sem_post(philo->data->print.sem);
 }
 
-void	*routine(t_philo *philo)
+void	*routine(void *param)
 {
+	t_philo	*philo;
+
+	printf("routine philo num\n");
+	philo = param;
 	setter(&(philo->last_meal), get_current_time());
 	while (1337)
 	{
@@ -31,10 +35,19 @@ void	*routine(t_philo *philo)
 		give_forks(philo);
 		ft_sleep(philo);
 		ft_think(philo);
-		if (getter(&(philo->data->death_spreed)))
+		if (get_sem_value(&(philo->data->death_spreed)))
 			return (NULL);
 	}
 	return (NULL);
+}
+
+void	start_philo(t_philo *philo)
+{
+	pthread_t	tid;
+
+	pthread_create(&tid, NULL, routine, philo);
+	monitor(philo);
+	pthread_join(tid, NULL);
 }
 
 void	start_simulation(t_philo *philos)
@@ -50,11 +63,13 @@ void	start_simulation(t_philo *philos)
 		pids[i] = fork();
 		if (pids[i] == 0)
 		{
-			routine(&(philos[i]));
+			start_philo(&(philos[i]));
 		}
 	}
 	i = -1;
-	while (wait(NULL) > 0)
-	{
-	}
+	sleep(10);
+	// while (++i < philos[0].data->number_of_philos)
+	// {
+	// 	waitpid(pids[i], NULL, 0);
+	// }
 }

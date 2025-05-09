@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 15:44:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/09 16:40:08 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/09 18:04:10 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <stdlib.h>   //*malloc
 # include <unistd.h>   //*write  usleep 
 # include <sys/time.h> //*gettimeofday
-#include <semaphore.h>
+# include <semaphore.h>
 
 typedef pthread_mutex_t	t_mutex;
 
@@ -37,7 +37,7 @@ typedef struct s_flag_sm{
 }	t_flag_sm;
 
 typedef struct s_flag_mu{
-	t_mutex			*mutex;
+	t_mutex			mutex;
 	long			value;
 }	t_flag_mu;
 
@@ -64,7 +64,7 @@ typedef struct s_philo{
 
 //* SIMULATION
 void	start_simulation(t_philo *philos);
-void	*routine(t_philo *philo);
+void	*routine(void *param);
 
 //* PHILO ACTION
 void	take_forks(t_philo *philo);
@@ -111,5 +111,9 @@ void	unlock(t_mutex *mutex);
 long	getter(t_flag_mu *flag);
 void	setter(t_flag_mu *flag, long value);
 void	increment_flag(t_flag_mu *flag);
+
+//* semaphore
+long	get_sem_value(t_flag_sm *flag);
+void	set_sem_value(t_flag_sm *flag, long value);
 
 #endif

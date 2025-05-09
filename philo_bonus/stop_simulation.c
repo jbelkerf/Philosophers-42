@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 12:41:17 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/01 13:53:40 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/09 17:01:53 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	dead_spreed(t_data *data)
 {
-	if (getter(&(data->death_spreed)))
+	if (get_sem_value(&(data->death_spreed)) == 1)
 		return (1);
 	return (0);
 }
