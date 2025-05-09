@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 13:36:15 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/09 18:24:29 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/09 18:51:08 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,28 +48,28 @@ void	start_philo(t_philo *philo)
 	pthread_create(&tid, NULL, routine, philo);
 	monitor(philo);
 	pthread_join(tid, NULL);
+	exit(1);
 }
 
 void	start_simulation(t_philo *philos)
 {
 	int		i;
-	pid_t	*pids;
 
 	i = -1;
 	philos[0].data->start_time = get_current_time();
-	pids = philos->data->pids;
 	while (++i < philos[0].data->number_of_philos)
 	{
-		pids[i] = fork();
-		if (pids[i] == 0)
+		philos->data->pids[i] = fork();
+		if (philos->data->pids[i] == 0)
 		{
 			start_philo(&(philos[i]));
 		}
 	}
 	i = -1;
-	sleep(10);
-	// while (++i < philos[0].data->number_of_philos)
-	// {
-	// 	waitpid(pids[i], NULL, 0);
-	// }
+	// sleep(10);
+	while (++i < philos[0].data->number_of_philos)
+	{
+		printf("pid %d --> %d\n",i, philos->data->pids[i]);
+		waitpid(philos->data->pids[i], NULL, 0);
+	}
 }
