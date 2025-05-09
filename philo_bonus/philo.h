@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 15:44:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/01 13:46:01 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/09 16:40:08 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdlib.h>   //*malloc
 # include <unistd.h>   //*write  usleep 
 # include <sys/time.h> //*gettimeofday
+#include <semaphore.h>
 
 typedef pthread_mutex_t	t_mutex;
 
@@ -29,37 +30,41 @@ typedef struct s_fork{
 	t_mutex	*fork;
 }	t_fork;
 
-typedef struct s_flag{
-	pthread_mutex_t	mutex;
+typedef struct s_flag_sm{
+	sem_t			*sem;
 	long			value;
-}	t_flag;
+	char			*path;
+}	t_flag_sm;
+
+typedef struct s_flag_mu{
+	t_mutex			*mutex;
+	long			value;
+}	t_flag_mu;
 
 typedef struct s_data{
-	t_mutex			print;
-	t_mutex			*forks;
+	t_flag_sm		print;
+	t_flag_sm		forks;
 	int				number_of_philos;
-	t_flag			death_spreed;
+	t_flag_sm		death_spreed;
 	time_t			time_to_die;
 	time_t			time_to_eat;
 	time_t			time_to_sleep;
 	int				optional;
 	time_t			start_time;
-	pthread_t		*tids;
+	pid_t			*pids;
 	void			*philos;
 }	t_data;
 
 typedef struct s_philo{
 	t_data			*data;
-	t_fork			first_fork;
-	t_fork			second_fork;
-	t_flag			last_meal;
-	t_flag			number_of_meals;
+	t_flag_mu		last_meal;
+	t_flag_mu		number_of_meals;
 	int				philo_matricule;
 }	t_philo;
 
 //* SIMULATION
 void	start_simulation(t_philo *philos);
-void	*routine(void *param);
+void	*routine(t_philo *philo);
 
 //* PHILO ACTION
 void	take_forks(t_philo *philo);
@@ -103,8 +108,8 @@ void	lock(t_mutex *mutex);
 void	unlock(t_mutex *mutex);
 
 //* SETTER GETTER
-long	getter(t_flag *flag);
-void	setter(t_flag *flag, long value);
-void	increment_flag(t_flag *flag);
+long	getter(t_flag_mu *flag);
+void	setter(t_flag_mu *flag, long value);
+void	increment_flag(t_flag_mu *flag);
 
 #endif

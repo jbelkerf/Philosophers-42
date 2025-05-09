@@ -6,14 +6,29 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 13:17:13 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/01 14:34:22 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/09 16:48:07 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+sem_t	*open_the_sem(char *path, int oflag, int mode, int value, t_flag_sm *flag)
+{
+	sem_t	*sm;
+	sem_unlink(path);
+	sm = sem_open(path, oflag, mode, value);
+	if (sm == SEM_FAILED)
+	{
+		printf("the sem %s failed to open\n", path);
+		exit(1);
+	}
+	flag->path = path;
+	return (sm);
+}
+
 t_data	*set_input(t_data	*data, int ac, char **av)
 {
+	data->death_spreed.sem = open_the_sem("/death", O_CREAT, 0666, 1, &(data->death_spreed));
 	data->death_spreed.value = 0;
 	data->start_time = 0;
 	data->number_of_philos = ft_atoi(av[1]);
@@ -36,20 +51,12 @@ t_data	*initialize_data(int ac, char **av)
 	if (!data)
 		return (NULL);
 	data = set_input(data, ac, av);
-	pthread_mutex_init(&(data->print), NULL);
+	data->print.sem = open_the_sem("/print", O_CREAT, 0666, 1, &(data->print));
 	i = 0;
-	data->tids = malloc(data->number_of_philos * sizeof(pthread_t));
-	if (!data->tids)
+	data->pids = malloc(data->number_of_philos * sizeof(pid_t));
+	if (!data->pids)
 		return (NULL);
-	pthread_mutex_init(&(data->death_spreed.mutex), NULL);
-	data->forks = malloc(data->number_of_philos * sizeof(t_mutex));
-	if (!data->forks)
-		return (NULL);
-	while (i < data->number_of_philos)
-	{
-		pthread_mutex_init(&(data->forks[i]), NULL);
-		i++;
-	}
+	data->forks.sem = open_the_sem("/forks", O_CREAT, 0666, data->number_of_philos, &(data->forks));
 	return (data);
 }
 
