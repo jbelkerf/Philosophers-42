@@ -1,0 +1,43 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/04/17 16:30:24 by jbelkerf          #+#    #+#              #
+#    Updated: 2025/04/30 21:42:21 by jbelkerf         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+
+
+NAME=philo
+
+CC=cc
+
+SANITIZE_THREAD= -fsanitize=thread -g
+SANITIZE_MEMORY= -fsanitize=address -g
+
+CFLAGS=  -pthread 
+
+HEADER= philo.h
+
+MAN_SRC=  philo.c initial_data.c tools.c routine.c stop_simulation.c start_simulation.c \
+valid_argument.c free_resource.c monitor.c setter_getter.c
+
+all: $(MAN_SRC) $(HEADER)
+	$(CC) $(CFLAGS) $(MAN_SRC) -o $(NAME)
+
+m: $(MAN_SRC) $(HEADER)
+	$(CC) $(CFLAGS) $(MAN_SRC) $(SANITIZE_MEMORY) -o $(NAME)
+	
+t: $(MAN_SRC) $(HEADER)
+	$(CC) $(CFLAGS) $(MAN_SRC) $(SANITIZE_THREAD) -o $(NAME)
+
+clean:
+	rm -f $(NAME)
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all
