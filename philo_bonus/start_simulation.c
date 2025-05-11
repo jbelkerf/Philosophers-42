@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 13:36:15 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/09 18:51:08 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/09 21:14:38 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	start_simulation(t_philo *philos)
 	// sleep(10);
 	while (++i < philos[0].data->number_of_philos)
 	{
-		printf("pid %d --> %d\n",i, philos->data->pids[i]);
+		//printf("pid %d --> %d\n",i, philos->data->pids[i]);
 		waitpid(philos->data->pids[i], NULL, 0);
 	}
 }

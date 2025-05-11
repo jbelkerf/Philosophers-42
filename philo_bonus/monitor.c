@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:32:23 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/09 18:11:04 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/09 21:14:15 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	*monitor(void *arg)
 	time_t	last_meal;
 	time_t	to_die;
 
-	printf("monitor philo num");
+	//printf("monitor philo num");
+	sleep(1);
 	philo = arg;
 	to_die = philo->data->time_to_die;
 	i = 0;
