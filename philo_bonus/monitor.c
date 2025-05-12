@@ -30,7 +30,7 @@ void	*monitor(void *arg)
 	time_t	to_die;
 
 	philo = arg;
-	sleep(2);
+	precise_sleep(100);
 	while (getter(&(philo->started)) == 0)
 		usleep(10);
 	to_die = philo->data->time_to_die;
@@ -40,8 +40,9 @@ void	*monitor(void *arg)
 		last_meal = get_current_time() - getter(&(philo->last_meal));
 		if (last_meal > to_die)
 		{
-			log_routine(philo, "die\n");
+			log_routine(philo, "died");
 			sem_post(philo->data->death_spreed.sem);
+			return NULL;
 		}
 	}
 }

@@ -51,15 +51,16 @@ t_data	*initialize_data(int ac, char **av)
 	if (!data)
 	return (NULL);
 	data = set_input(data, ac, av);
+	num = data->number_of_philos;
 	data->print.sem = open_t_sem("/print", 1, &(data->print));
+	data->forks.sem = open_t_sem("/forks", num, &(data->forks));
+	if (data->optional != -1)
+		data->max_meals.sem = open_t_sem("/max_meals", data->optional, &(data->max_meals));
 	data->death_spreed.sem = open_t_sem("/death", 0, &(data->death_spreed));
 	i = 0;
 	data->pids = malloc(data->number_of_philos * sizeof(pid_t));
 	if (!data->pids)
 		return (NULL);
-	num = data->number_of_philos;
-	data->forks.sem = open_t_sem("/forks", num, &(data->forks));
-	data->forks.sem = open_t_sem("/max_meals", 0, &(data->forks));
 	return (data);
 }
 

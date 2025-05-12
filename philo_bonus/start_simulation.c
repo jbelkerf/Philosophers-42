@@ -24,12 +24,13 @@ void	*routine(void *param)
 	t_philo	*philo;
 
 	philo = param;
-	printf("amalk\n");
+	// printf("amalk\n");
 	increment_flag(&(philo->started));
 	setter(&(philo->last_meal), get_current_time());
 	while (1337)
 	{
 		take_forks(philo);
+		// printf("philo %d\n", philo->philo_matricule);
 		ft_eat(philo);
 		give_forks(philo);
 		ft_sleep(philo);
@@ -42,7 +43,7 @@ void	start_philo(t_philo *philo)
 {
 	pthread_t	tid;
 
-	printf("waaaaa\n");
+	//printf("waaaaa philo %d\n", philo->philo_matricule);
 	pthread_create(&tid, NULL, routine, philo);
 	monitor(philo);
 	pthread_join(tid, NULL);
@@ -92,25 +93,27 @@ void	start_simulation(t_philo *philos)
 	pthread_t	tid[2];
 
 	i = -1;
-	philos->data->start_time = get_current_time();
-	while (++i < philos->data->number_of_philos)
-	{
-		philos->data->pids[i] = fork();
-		if (philos->data->pids[i] == 0)
-		{
-			start_philo(&(philos[i]));
-		}
-	}
+	philos->data->start_time = get_current_time();  //*set start time
+
+	while (++i < philos->data->number_of_philos)//
+	{                                            //
+		philos->data->pids[i] = fork();          //   
+		if (philos->data->pids[i] == 0)          //
+		{                                        //*launch philos**
+			start_philo(&(philos[i]));           //
+		}                                        //
+	}                                           //
+	if (philos->data->optional != -1)                                        ///
+		pthread_create(&(tid[0]), NULL, watch_fat_philo_meals, philos->data); ///*checck for max meals
+	pthread_create(&(tid[1]), NULL, declare_war, philos->data);  //**hoock for died or max meals */
 	if (philos->data->optional != -1)
-		pthread_create(&(tid[0]), NULL, watch_fat_philo_meals, philos->data);
-	pthread_create(&(tid[1]), NULL, declare_war, philos->data);
-	if (philos->data->optional != -1)
-		pthread_join(tid[0], NULL);
+		pthread_join(tid[0], NULL);///*join
 	pthread_join(tid[1], NULL);
 	i = 0;
+	// sleep(100);
 	while (i < philos->data->number_of_philos)
 	{
-		waitpid(philos->data->pids[i], NULL, 0);
+		waitpid(philos->data->pids[i], NULL, 0);//*wait
 		i++;
 	}
 }
