@@ -120,5 +120,7 @@ long	getter(t_flag_mu *flag);
 void	setter(t_flag_mu *flag, long value);
 void	increment_flag(t_flag_mu *flag);
 
+//* start
+void	unified_start(t_philo *philo);
 
 #endif

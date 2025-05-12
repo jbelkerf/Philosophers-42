@@ -12,6 +12,14 @@
 
 #include "philo.h"
 
+void	unified_start(t_philo *philo)
+{
+	while (get_current_time() < philo->data->start_time)
+	{
+		usleep(10);
+	}
+}
+
 void	log_routine(t_philo *philo, char *action)
 {
 	sem_wait(philo->data->print.sem);
@@ -24,13 +32,10 @@ void	*routine(void *param)
 	t_philo	*philo;
 
 	philo = param;
-	// printf("amalk\n");
-	increment_flag(&(philo->started));
 	setter(&(philo->last_meal), get_current_time());
 	while (1337)
 	{
 		take_forks(philo);
-		// printf("philo %d\n", philo->philo_matricule);
 		ft_eat(philo);
 		give_forks(philo);
 		ft_sleep(philo);
@@ -43,9 +48,9 @@ void	start_philo(t_philo *philo)
 {
 	pthread_t	tid;
 
-	//printf("waaaaa philo %d\n", philo->philo_matricule);
-	pthread_create(&tid, NULL, routine, philo);
-	monitor(philo);
+	//unified_start(philo);
+	pthread_create(&tid, NULL, monitor, philo);
+	routine(philo);
 	pthread_join(tid, NULL);
 	exit(1);
 }
@@ -79,6 +84,7 @@ void	*declare_war(void *arg)
 	int i = 0;
 	while (i < data->number_of_philos)
 	{
+		printf("pid %d\n", data->pids[i]);
 		kill(data->pids[i], SIGKILL);
 		i++;
 	}
@@ -94,13 +100,29 @@ void	start_simulation(t_philo *philos)
 
 	i = -1;
 	philos->data->start_time = get_current_time();  //*set start time
+	printf("\n\nshould start %ld\n\n", philos->data->start_time + 1000);
 
 	while (++i < philos->data->number_of_philos)//
-	{                                            //
-		philos->data->pids[i] = fork();          //   
-		if (philos->data->pids[i] == 0)          //
-		{                                        //*launch philos**
-			start_philo(&(philos[i]));           //
+	{    
+		if (i % 2 == 0)
+		{
+			philos->data->pids[i] = fork();          //   
+			if (philos->data->pids[i] == 0)          //
+			{                                        //*launch philos**
+				start_philo(&(philos[i]));           //
+			}                                        //
+		}                                        //
+	}  										 //
+	i = -1;                                        
+	while (++i < philos->data->number_of_philos)//
+	{   
+		if (i % 2 != 0)
+		{
+			philos->data->pids[i] = fork();          //   
+			if (philos->data->pids[i] == 0)          //
+			{                                        //*launch philos**
+				start_philo(&(philos[i]));           //
+			}                                        //
 		}                                        //
 	}                                           //
 	if (philos->data->optional != -1)                                        ///
@@ -110,7 +132,6 @@ void	start_simulation(t_philo *philos)
 		pthread_join(tid[0], NULL);///*join
 	pthread_join(tid[1], NULL);
 	i = 0;
-	// sleep(100);
 	while (i < philos->data->number_of_philos)
 	{
 		waitpid(philos->data->pids[i], NULL, 0);//*wait

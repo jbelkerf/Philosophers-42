@@ -64,6 +64,8 @@ t_data	*initialize_data(int ac, char **av)
 	return (data);
 }
 
+#include <limits.h> //! to be removed
+
 t_philo	*initialize_philos(t_data *data)
 {
 	t_philo	*philos;
@@ -78,7 +80,7 @@ t_philo	*initialize_philos(t_data *data)
 	{
 		philos[i].data = data;
 		philos[i].philo_matricule = i;
-		philos[i].last_meal.value = 0;
+		philos[i].last_meal.value = LONG_MAX - 1;
 		pthread_mutex_init(&(philos[i].last_meal.mutex), NULL);
 		pthread_mutex_init(&(philos[i].number_of_meals.mutex), NULL);
 		pthread_mutex_init(&(philos[i].started.mutex), NULL);

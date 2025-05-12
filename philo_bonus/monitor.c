@@ -30,19 +30,21 @@ void	*monitor(void *arg)
 	time_t	to_die;
 
 	philo = arg;
-	precise_sleep(100);
-	while (getter(&(philo->started)) == 0)
-		usleep(10);
+	//usleep(100);
+	
 	to_die = philo->data->time_to_die;
 	i = 0;
 	while (1337)
 	{
 		last_meal = get_current_time() - getter(&(philo->last_meal));
-		if (last_meal > to_die)
+		//printf("last meal %ld\n", last_meal);
+		if (last_meal >= to_die)
 		{
-			log_routine(philo, "died");
+			sem_wait(philo->data->print.sem);
+			printf("%ld %d died\n", get_timestamp(philo), philo->philo_matricule);
 			sem_post(philo->data->death_spreed.sem);
 			return NULL;
 		}
+		usleep(10);
 	}
 }
