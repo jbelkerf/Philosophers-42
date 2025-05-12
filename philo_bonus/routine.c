@@ -28,11 +28,11 @@ void	take_forks(t_philo *philo)
 void	ft_eat(t_philo *philo)
 {
 	log_routine(philo, "is eating");
+	if (getter(&(philo->number_of_meals)) == philo->data->optional)
+		sem_post(philo->data->max_meals.sem);
 	setter(&(philo->last_meal), get_current_time());
 	precise_sleep(philo->data->time_to_eat);
 	increment_flag(&(philo->number_of_meals));
-	if (getter(&(philo->number_of_meals)) == philo->data->optional)
-		sem_post(philo->data->max_meals.sem);
 }
 
 void	ft_sleep(t_philo *philo)

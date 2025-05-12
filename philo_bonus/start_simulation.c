@@ -33,13 +33,15 @@ void	*routine(void *param)
 
 	philo = param;
 	setter(&(philo->last_meal), get_current_time());
+	if (philo->philo_matricule % 2 == 0)
+		ft_sleep(philo);
 	while (1337)
 	{
+		ft_think(philo);
 		take_forks(philo);
 		ft_eat(philo);
 		give_forks(philo);
 		ft_sleep(philo);
-		ft_think(philo);
 	}
 	return (NULL);
 }
@@ -48,7 +50,7 @@ void	start_philo(t_philo *philo)
 {
 	pthread_t	tid;
 
-	//unified_start(philo);
+	unified_start(philo);
 	pthread_create(&tid, NULL, monitor, philo);
 	routine(philo);
 	pthread_join(tid, NULL);
@@ -68,10 +70,9 @@ void *watch_fat_philo_meals(void *arg)
 		i++;
 	}
 	i = 0;
-	while (i < data->number_of_philos)
-	{
-		sem_post(data->death_spreed.sem);
-	}
+	sem_wait(data->print.sem);
+	usleep(10);
+	sem_post(data->death_spreed.sem);
 	return NULL;
 }
 
@@ -84,7 +85,6 @@ void	*declare_war(void *arg)
 	int i = 0;
 	while (i < data->number_of_philos)
 	{
-		printf("pid %d\n", data->pids[i]);
 		kill(data->pids[i], SIGKILL);
 		i++;
 	}
@@ -99,9 +99,7 @@ void	start_simulation(t_philo *philos)
 	pthread_t	tid[2];
 
 	i = -1;
-	philos->data->start_time = get_current_time();  //*set start time
-	printf("\n\nshould start %ld\n\n", philos->data->start_time + 1000);
-
+	philos->data->start_time = get_current_time() + 1000;  //*set start time
 	while (++i < philos->data->number_of_philos)//
 	{    
 		if (i % 2 == 0)

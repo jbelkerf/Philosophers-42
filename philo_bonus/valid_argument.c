@@ -11,10 +11,38 @@
 /* ************************************************************************** */
 
 #include "philo.h"
+#include <limits.h>//!to be removed
 
 int	ft_isdigit(char c)
 {
 	return (c <= '9' && c >= '0');
+}
+
+int ft_strlen(char *str)
+{
+	int i;
+
+	while (str[i])
+	{
+		i++;
+	}
+	return i;
+}
+
+long    time_atoi(char *str)
+{
+    unsigned long ff = 0;
+    while (*str == '0')
+        str++;
+
+    if (ft_strlen(str) > ft_strlen("9223372036854775807"))
+        return -1;
+    while (*str >= '0' && *str <= '9')
+        ff = ff * 10 + *(str++) - '0';
+    if (*str != '\0' || ff > LONG_MAX)
+        return -1;
+    return ff;
+
 }
 
 int	is_valid_number(char *arg)
@@ -50,7 +78,7 @@ int	non_valid_arguments(char **av, int ac)
 	}
 	while (i < ac)
 	{
-		if (!is_valid_number(av[i]))
+		if (time_atoi(av[i]) == -1)
 		{
 			printf("\033[0;31m%s is non valide number\n", av[i]);
 			return (1);
