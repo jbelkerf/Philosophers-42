@@ -23,7 +23,7 @@ CFLAGS=  -pthread
 
 HEADER= philo.h
 
-MAN_SRC=  philo.c initial_data.c tools.c routine.c stop_simulation.c start_simulation.c \
+MAN_SRC=  philo.c initial_data.c tools.c routine.c  start_simulation.c \
 valid_argument.c free_resource.c monitor.c setter_getter.c
 
 all: $(MAN_SRC) $(HEADER)

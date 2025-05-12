@@ -36,7 +36,6 @@ typedef struct s_fork
 typedef struct s_flag_sm
 {
 	sem_t			*sem;
-	long			value;
 	char			*path;
 }	t_flag_sm;
 
@@ -48,14 +47,15 @@ typedef struct s_flag_mu
 
 typedef struct s_data
 {
+	int				number_of_philos;
+	int				optional;
 	t_flag_sm		print;
 	t_flag_sm		forks;
-	int				number_of_philos;
 	t_flag_sm		death_spreed;
+	t_flag_sm		max_meals;
 	time_t			time_to_die;
 	time_t			time_to_eat;
 	time_t			time_to_sleep;
-	int				optional;
 	time_t			start_time;
 	pid_t			*pids;
 	void			*philos;
@@ -109,7 +109,7 @@ int		should_stoped(t_philo *philo);
 void	free_resources(t_philo *philos);
 
 //* MOUNITOR
-long	monitor(void *arg);
+void	*monitor(void *arg);
 
 //* MUTEX HANDING
 void	lock(t_mutex *mutex);
@@ -120,8 +120,5 @@ long	getter(t_flag_mu *flag);
 void	setter(t_flag_mu *flag, long value);
 void	increment_flag(t_flag_mu *flag);
 
-//* semaphore
-long	get_sem_value(t_flag_sm *flag);
-void	set_sem_value(t_flag_sm *flag, long value);
 
 #endif

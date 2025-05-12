@@ -22,7 +22,7 @@ void	unlock(t_mutex *mutex)
 	pthread_mutex_unlock(mutex);
 }
 
-long	monitor(void *arg)
+void	*monitor(void *arg)
 {
 	t_philo	*philo;
 	int		i;
@@ -30,7 +30,7 @@ long	monitor(void *arg)
 	time_t	to_die;
 
 	philo = arg;
-	sleep(1);
+	sleep(2);
 	while (getter(&(philo->started)) == 0)
 		usleep(10);
 	to_die = philo->data->time_to_die;
@@ -40,9 +40,8 @@ long	monitor(void *arg)
 		last_meal = get_current_time() - getter(&(philo->last_meal));
 		if (last_meal > to_die)
 		{
-			set_sem_value(&(philo->data->death_spreed), 1);
-			return (philo->philo_matricule);
+			log_routine(philo, "die\n");
+			sem_post(philo->data->death_spreed.sem);
 		}
 	}
-	return (1);
 }

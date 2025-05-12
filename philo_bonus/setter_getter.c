@@ -36,19 +36,3 @@ void	increment_flag(t_flag_mu *flag)
 	unlock(&(flag->mutex));
 }
 
-long	get_sem_value(t_flag_sm *flag)
-{
-	long	value;
-
-	sem_wait(flag->sem);
-	value = flag->value;
-	sem_post(flag->sem);
-	return (value);
-}
-
-void	set_sem_value(t_flag_sm *flag, long value)
-{
-	sem_wait(flag->sem);
-	flag->value = value;
-	sem_post(flag->sem);
-}
