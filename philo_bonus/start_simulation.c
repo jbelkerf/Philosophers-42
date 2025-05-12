@@ -25,8 +25,9 @@ void	*routine(void *param)
 {
 	t_philo	*philo;
 
-	printf("routine philo num\n");
 	philo = param;
+	//printf("routine philo num\n");
+	increment_flag(&(philo->started));
 	setter(&(philo->last_meal), get_current_time());
 	while (1337)
 	{
@@ -44,21 +45,25 @@ void	*routine(void *param)
 void	start_philo(t_philo *philo)
 {
 	pthread_t	tid;
+	int			dead_philo;
 
 	pthread_create(&tid, NULL, routine, philo);
-	monitor(philo);
+	dead_philo = monitor(philo);
 	pthread_join(tid, NULL);
-	exit(1);
+	exit(dead_philo);
 }
 
 void	start_simulation(t_philo *philos)
 {
 	int		i;
+	int		status;
+	int		pid;
 
 	i = -1;
-	philos[0].data->start_time = get_current_time();
-	while (++i < philos[0].data->number_of_philos)
+	philos->data->start_time = get_current_time();
+	while (++i < philos->data->number_of_philos)
 	{
+		//printf(" i = %d \n", i);
 		philos->data->pids[i] = fork();
 		if (philos->data->pids[i] == 0)
 		{
@@ -66,10 +71,15 @@ void	start_simulation(t_philo *philos)
 		}
 	}
 	i = -1;
-	// sleep(10);
+	pid = waitpid(-1, &status, 0);
+	status = WEXITSTATUS(status);
+	// printf("the died is %d\n", status);
+	printf("%ld %d died\n", get_timestamp(&(philos[status])), philos[status].philo_matricule);
 	while (++i < philos[0].data->number_of_philos)
 	{
-		//printf("pid %d --> %d\n",i, philos->data->pids[i]);
-		waitpid(philos->data->pids[i], NULL, 0);
+		if (philos->data->pids[i] != pid)
+		{
+			kill(philos->data->pids[i], SIGKILL);
+		}
 	}
 }

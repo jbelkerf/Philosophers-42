@@ -80,6 +80,8 @@ t_philo	*initialize_philos(t_data *data)
 		philos[i].last_meal.value = 0;
 		pthread_mutex_init(&(philos[i].last_meal.mutex), NULL);
 		pthread_mutex_init(&(philos[i].number_of_meals.mutex), NULL);
+		pthread_mutex_init(&(philos[i].started.mutex), NULL);
+		philos[i].started.value = 0;
 		philos[i].number_of_meals.value = 0;
 		i++;
 	}

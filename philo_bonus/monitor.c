@@ -22,7 +22,7 @@ void	unlock(t_mutex *mutex)
 	pthread_mutex_unlock(mutex);
 }
 
-void	*monitor(void *arg)
+long	monitor(void *arg)
 {
 	t_philo	*philo;
 	int		i;
@@ -30,8 +30,10 @@ void	*monitor(void *arg)
 	time_t	to_die;
 
 	//printf("monitor philo num");
-	sleep(1);
 	philo = arg;
+	sleep(1);
+	while (getter(&(philo->started)) == 0)
+		usleep(10);
 	to_die = philo->data->time_to_die;
 	i = 0;
 	while (1337)
@@ -40,8 +42,8 @@ void	*monitor(void *arg)
 		if (last_meal > to_die)
 		{
 			set_sem_value(&(philo->data->death_spreed), 1);
-			return (NULL);
+			return (philo->philo_matricule);
 		}
 	}
-	return (NULL);
+	return (1);
 }
