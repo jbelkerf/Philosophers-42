@@ -12,8 +12,6 @@
 
 #include "philo.h"
 
-
-
 void	destroy_mutex(t_mutex *mutex)
 {
 	pthread_mutex_destroy(mutex);

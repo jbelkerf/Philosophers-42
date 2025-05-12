@@ -43,9 +43,9 @@ int	non_valid_arguments(char **av, int ac)
 	if (ac != 5 && ac != 6)
 	{
 		printf("\033[0;31mUsage Eroor!\n");
-		printf("\033[38;5;208mHow to use:\n\tphilo number_of_philosophers time_");
-		printf("\033[38;5;208mto_die time_to_eat time_to_sleep [number_of_");
-		printf("\033[38;5;208mtimes_each_philosopher_must_eat]\n");
+		printf("\033[38;5;208mHow to use:\n\tphilo number_of_philosophers");
+		printf("\033[38;5;208m time_to_die time_to_eat time_to_sleep [numbe");
+		printf("\033[38;5;208mr_of_times_each_philosopher_must_eat]\n");
 		return (1);
 	}
 	while (i < ac)

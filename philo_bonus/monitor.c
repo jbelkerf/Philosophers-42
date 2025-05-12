@@ -29,7 +29,6 @@ long	monitor(void *arg)
 	time_t	last_meal;
 	time_t	to_die;
 
-	//printf("monitor philo num");
 	philo = arg;
 	sleep(1);
 	while (getter(&(philo->started)) == 0)

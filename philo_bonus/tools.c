@@ -17,8 +17,6 @@ time_t	get_timestamp(t_philo *philo)
 	return (get_current_time() - philo->data->start_time);
 }
 
-
-
 void	precise_sleep(time_t time_to_wait)
 {
 	time_t			start;
