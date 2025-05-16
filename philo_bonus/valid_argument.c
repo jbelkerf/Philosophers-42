@@ -6,12 +6,11 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 13:39:13 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/16 11:55:58 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/16 13:28:39 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <limits.h>//!to be removed
 
 int	ft_isdigit(char c)
 {
@@ -40,7 +39,7 @@ long	time_atoi(char *str)
 		return (-1);
 	while (*str >= '0' && *str <= '9')
 		ff = ff * 10 + *(str++) - '0';
-	if (*str != '\0' || ff > LONG_MAX)
+	if (*str != '\0' || ff > 9223372036854775807)
 		return (-1);
 	return (ff);
 }

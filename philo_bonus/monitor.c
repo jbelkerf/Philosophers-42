@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:32:23 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/16 12:09:39 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/16 13:27:43 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,20 @@ void	unlock(t_mutex *mutex)
 void	*monitor(void *arg)
 {
 	t_philo	*philo;
-	int		i;
+	int		matricule;
 	time_t	last_meal;
 	time_t	to_die;
 
 	philo = arg;
 	to_die = philo->data->time_to_die;
-	i = 0;
 	while (1337)
 	{
 		last_meal = get_current_time() - getter(&(philo->last_meal));
 		if (last_meal >= to_die)
 		{
+			matricule = philo->philo_matricule;
 			sem_wait(philo->data->print.sem);
-			printf("%ld %d died\n", get_timestamp(philo), philo->philo_matricule);
+			printf("%ld %d died\n", get_timestamp(philo), matricule);
 			sem_post(philo->data->death_spreed.sem);
 			return (NULL);
 		}

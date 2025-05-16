@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 13:36:15 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/16 12:06:28 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/16 13:24:39 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	unified_start(t_philo *philo)
 {
 	while (get_current_time() < philo->data->start_time)
 	{
-		usleep(10);
+		usleep(5);
 	}
 }
 
@@ -65,7 +65,7 @@ void	start_simulation(t_philo *philos)
 	pthread_t	tid[2];
 
 	i = -1;
-	philos->data->start_time = get_current_time() + 1000;
+	philos->data->start_time = get_current_time() + 3000;
 	while (++i < philos->data->number_of_philos)
 	{
 		if (i % 2 == 0)
