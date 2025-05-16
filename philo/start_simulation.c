@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 13:36:15 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/01 13:52:33 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/16 13:16:48 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ void	*routine(void *param)
 	setter(&(philo->last_meal), get_current_time());
 	while (1337)
 	{
+		ft_think(philo);
 		take_forks(philo);
 		ft_eat(philo);
 		give_forks(philo);
 		ft_sleep(philo);
-		ft_think(philo);
 		if (getter(&(philo->data->death_spreed)))
 			return (NULL);
 	}
