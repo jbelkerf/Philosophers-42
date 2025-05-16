@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 13:17:13 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/09 18:05:04 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/16 11:49:36 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ t_data	*set_input(t_data	*data, int ac, char **av)
 	data->time_to_eat = ft_atoi(av[3]);
 	data->time_to_sleep = ft_atoi(av[4]);
 	if (ac == 6)
-	data->optional = ft_atoi(av[5]);
+		data->optional = ft_atoi(av[5]);
 	else
-	data->optional = -1;
+		data->optional = -1;
 	return (data);
 }
 
@@ -55,7 +55,7 @@ t_data	*initialize_data(int ac, char **av)
 	data->print.sem = open_t_sem("/print", 1, &(data->print));
 	data->forks.sem = open_t_sem("/forks", num, &(data->forks));
 	if (data->optional != -1)
-		data->max_meals.sem = open_t_sem("/max_meals", data->optional, &(data->max_meals));
+		data->max_meals.sem = open_t_sem("/max_meals", 0, &(data->max_meals));
 	data->death_spreed.sem = open_t_sem("/death", 0, &(data->death_spreed));
 	i = 0;
 	data->pids = malloc(data->number_of_philos * sizeof(pid_t));

@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 13:36:15 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/09 21:14:38 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/16 11:51:23 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	start_philo(t_philo *philo)
 {
 	pthread_t	tid;
 
+	//printf("%d dkhal\n", philo->philo_matricule);
 	unified_start(philo);
 	pthread_create(&tid, NULL, monitor, philo);
 	routine(philo);
@@ -101,7 +102,7 @@ void	start_simulation(t_philo *philos)
 	i = -1;
 	philos->data->start_time = get_current_time() + 1000;  //*set start time
 	while (++i < philos->data->number_of_philos)//
-	{    
+	{
 		if (i % 2 == 0)
 		{
 			philos->data->pids[i] = fork();          //   
@@ -111,6 +112,7 @@ void	start_simulation(t_philo *philos)
 			}                                        //
 		}                                        //
 	}  										 //
+	//printf("i = %d\n", i);
 	i = -1;                                        
 	while (++i < philos->data->number_of_philos)//
 	{   
@@ -123,6 +125,7 @@ void	start_simulation(t_philo *philos)
 			}                                        //
 		}                                        //
 	}                                           //
+	//printf("i = %d\n", i);
 	if (philos->data->optional != -1)                                        ///
 		pthread_create(&(tid[0]), NULL, watch_fat_philo_meals, philos->data); ///*checck for max meals
 	pthread_create(&(tid[1]), NULL, declare_war, philos->data);  //**hoock for died or max meals */
@@ -130,6 +133,7 @@ void	start_simulation(t_philo *philos)
 		pthread_join(tid[0], NULL);///*join
 	pthread_join(tid[1], NULL);
 	i = 0;
+	//*sleep(5);//!ms7 ms7
 	while (i < philos->data->number_of_philos)
 	{
 		waitpid(philos->data->pids[i], NULL, 0);//*wait
