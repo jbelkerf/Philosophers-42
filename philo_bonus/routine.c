@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:04:30 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/16 11:50:37 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/16 12:09:54 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ void	take_forks(t_philo *philo)
 {
 	int	matricule;
 
-	// printf("waaaa %d take fork\n", philo->philo_matricule);
 	matricule = philo->philo_matricule;
 	sem_wait(philo->data->forks.sem);
-	// printf("nadi %d take fork\n", philo->philo_matricule);
 	log_routine(philo, "has taken a fork");
 	sem_wait(philo->data->forks.sem);
 	log_routine(philo, "has taken a fork");

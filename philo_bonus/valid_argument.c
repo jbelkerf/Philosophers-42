@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 13:39:13 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/16 11:51:52 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/16 11:55:58 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,31 +18,31 @@ int	ft_isdigit(char c)
 	return (c <= '9' && c >= '0');
 }
 
-int ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
-	int i;
+	int	i;
 
 	while (str[i])
 	{
 		i++;
 	}
-	return i;
+	return (i);
 }
 
-long    time_atoi(char *str)
+long	time_atoi(char *str)
 {
-    unsigned long ff = 0;
-    while (*str == '0')
-        str++;
+	unsigned long	ff;
 
-    if (ft_strlen(str) > ft_strlen("9223372036854775807"))
-        return -1;
-    while (*str >= '0' && *str <= '9')
-        ff = ff * 10 + *(str++) - '0';
-    if (*str != '\0' || ff > LONG_MAX)
-        return -1;
-    return ff;
-
+	ff = 0;
+	while (*str == '0')
+		str++;
+	if (ft_strlen(str) > ft_strlen("9223372036854775807"))
+		return (-1);
+	while (*str >= '0' && *str <= '9')
+		ff = ff * 10 + *(str++) - '0';
+	if (*str != '\0' || ff > LONG_MAX)
+		return (-1);
+	return (ff);
 }
 
 int	is_valid_number(char *arg)

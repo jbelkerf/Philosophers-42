@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 13:36:15 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/16 11:51:23 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/16 12:06:28 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	start_philo(t_philo *philo)
 {
 	pthread_t	tid;
 
-	//printf("%d dkhal\n", philo->philo_matricule);
 	unified_start(philo);
 	pthread_create(&tid, NULL, monitor, philo);
 	routine(philo);
@@ -58,85 +57,46 @@ void	start_philo(t_philo *philo)
 	exit(1);
 }
 
-void *watch_fat_philo_meals(void *arg)
-{
-	t_data	*data;
-	int		i;
-
-	i = 0;
-	data = arg;
-	while (i < data->number_of_philos)
-	{
-		sem_wait(data->max_meals.sem);
-		i++;
-	}
-	i = 0;
-	sem_wait(data->print.sem);
-	usleep(10);
-	sem_post(data->death_spreed.sem);
-	return NULL;
-}
-
-void	*declare_war(void *arg)
-{
-	t_data	*data;
-
-	data = arg;
-	sem_wait(data->death_spreed.sem);
-	int i = 0;
-	while (i < data->number_of_philos)
-	{
-		kill(data->pids[i], SIGKILL);
-		i++;
-	}
-	return (NULL);
-}
-
 void	start_simulation(t_philo *philos)
 {
-	int		i;
-	int		status;
-	t_philo	*philo;
+	int			i;
+	int			status;
+	t_philo		*philo;
 	pthread_t	tid[2];
 
 	i = -1;
-	philos->data->start_time = get_current_time() + 1000;  //*set start time
-	while (++i < philos->data->number_of_philos)//
+	philos->data->start_time = get_current_time() + 1000;
+	while (++i < philos->data->number_of_philos)
 	{
 		if (i % 2 == 0)
 		{
-			philos->data->pids[i] = fork();          //   
-			if (philos->data->pids[i] == 0)          //
-			{                                        //*launch philos**
-				start_philo(&(philos[i]));           //
-			}                                        //
-		}                                        //
-	}  										 //
-	//printf("i = %d\n", i);
-	i = -1;                                        
-	while (++i < philos->data->number_of_philos)//
-	{   
+			philos->data->pids[i] = fork();
+			if (philos->data->pids[i] == 0)
+				start_philo(&(philos[i]));
+		}
+	}
+	i = -1;
+	while (++i < philos->data->number_of_philos)
+	{
 		if (i % 2 != 0)
 		{
-			philos->data->pids[i] = fork();          //   
-			if (philos->data->pids[i] == 0)          //
-			{                                        //*launch philos**
-				start_philo(&(philos[i]));           //
-			}                                        //
-		}                                        //
-	}                                           //
-	//printf("i = %d\n", i);
-	if (philos->data->optional != -1)                                        ///
-		pthread_create(&(tid[0]), NULL, watch_fat_philo_meals, philos->data); ///*checck for max meals
-	pthread_create(&(tid[1]), NULL, declare_war, philos->data);  //**hoock for died or max meals */
+			philos->data->pids[i] = fork();
+			if (philos->data->pids[i] == 0)
+			{
+				start_philo(&(philos[i]));
+			}
+		}
+	}
 	if (philos->data->optional != -1)
-		pthread_join(tid[0], NULL);///*join
+		pthread_create(&(tid[0]), NULL, watch_fat_philo_meals, philos->data);
+	pthread_create(&(tid[1]), NULL, declare_war, philos->data);
+	if (philos->data->optional != -1)
+		pthread_join(tid[0], NULL);
 	pthread_join(tid[1], NULL);
 	i = 0;
-	//*sleep(5);//!ms7 ms7
 	while (i < philos->data->number_of_philos)
 	{
-		waitpid(philos->data->pids[i], NULL, 0);//*wait
+		waitpid(philos->data->pids[i], NULL, 0);
 		i++;
 	}
 }

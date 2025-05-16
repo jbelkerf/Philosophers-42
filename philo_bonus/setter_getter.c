@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 13:14:02 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/09 18:04:57 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/16 12:10:08 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,3 @@ void	increment_flag(t_flag_mu *flag)
 	flag->value++;
 	unlock(&(flag->mutex));
 }
-

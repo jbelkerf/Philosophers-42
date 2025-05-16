@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 13:17:13 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/16 11:49:36 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/16 12:07:54 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ t_data	*initialize_data(int ac, char **av)
 	t_data	*data;
 	int		i;
 	int		num;
-	
+
 	data = malloc(sizeof(t_data));
 	if (!data)
-	return (NULL);
+		return (NULL);
 	data = set_input(data, ac, av);
 	num = data->number_of_philos;
 	data->print.sem = open_t_sem("/print", 1, &(data->print));
@@ -63,8 +63,6 @@ t_data	*initialize_data(int ac, char **av)
 		return (NULL);
 	return (data);
 }
-
-#include <limits.h> //! to be removed
 
 t_philo	*initialize_philos(t_data *data)
 {
@@ -80,7 +78,7 @@ t_philo	*initialize_philos(t_data *data)
 	{
 		philos[i].data = data;
 		philos[i].philo_matricule = i;
-		philos[i].last_meal.value = LONG_MAX - 1;
+		philos[i].last_meal.value = 0;
 		pthread_mutex_init(&(philos[i].last_meal.mutex), NULL);
 		pthread_mutex_init(&(philos[i].number_of_meals.mutex), NULL);
 		pthread_mutex_init(&(philos[i].started.mutex), NULL);

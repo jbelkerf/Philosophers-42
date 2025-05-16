@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 15:44:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/09 18:04:10 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/16 12:04:07 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ int		max_meals(t_philo *philos);
 
 //* STOP SIMULATION
 int		should_stoped(t_philo *philo);
+void	*watch_fat_philo_meals(void *arg);
+void	*declare_war(void *arg);
 
 //* FREE RESOURCES
 void	free_resources(t_philo *philos);
