@@ -6,11 +6,18 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:14:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/17 15:46:45 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/17 16:03:31 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
+
+void	log_routine(t_philo *philo, char *action)
+{
+	sem_wait(philo->data->print.sem);
+	printf("%ld %d %s\n", get_timestamp(philo), philo->philo_matricule, action);
+	sem_post(philo->data->print.sem);
+}
 
 time_t	get_timestamp(t_philo *philo)
 {

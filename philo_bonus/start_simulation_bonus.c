@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 13:36:15 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/17 15:53:27 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/17 16:09:21 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,6 @@ void	unified_start(t_philo *philo)
 	{
 		usleep(5);
 	}
-}
-
-void	log_routine(t_philo *philo, char *action)
-{
-	sem_wait(philo->data->print.sem);
-	printf("%ld %d %s\n", get_timestamp(philo), philo->philo_matricule, action);
-	sem_post(philo->data->print.sem);
 }
 
 void	*routine(void *param)
@@ -57,13 +50,11 @@ void	start_philo(t_philo *philo)
 	exit(1);
 }
 
-void	start_simulation(t_philo *philos)
+void	let_philos_be(t_philo *philos)
 {
-	int			i;
-	pthread_t	tid[2];
+	int	i;
 
 	i = -1;
-	philos->data->start_time = get_current_time() + 3000;
 	while (++i < philos->data->number_of_philos)
 	{
 		if (i % 2 == 0)
@@ -80,11 +71,19 @@ void	start_simulation(t_philo *philos)
 		{
 			philos->data->pids[i] = fork();
 			if (philos->data->pids[i] == 0)
-			{
 				start_philo(&(philos[i]));
-			}
 		}
 	}
+}
+
+void	start_simulation(t_philo *philos)
+{
+	int			i;
+	pthread_t	tid[2];
+
+	i = -1;
+	philos->data->start_time = get_current_time() + 3000;
+	let_philos_be(philos);
 	if (philos->data->optional != -1)
 		pthread_create(&(tid[0]), NULL, watch_fat_philo_meals, philos->data);
 	pthread_create(&(tid[1]), NULL, declare_war, philos->data);
