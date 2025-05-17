@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 13:39:13 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/17 15:46:37 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/17 15:59:34 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	ft_strlen(char *str)
 {
 	int	i;
 
+	i = 0;
 	while (str[i])
 	{
 		i++;
@@ -84,9 +85,9 @@ int	non_valid_arguments(char **av, int ac)
 		}
 		i++;
 	}
-	if (ft_atoi(av[1]) > 200)
-	{
-		return (printf("\033[0;31mnumber of philos is more than 200\n"), 1);
-	}
+	if (ft_atoi(av[1]) > 200 || ft_atoi(av[1]) <= 0)
+		return (printf("\033[0;31mnumber of philos not valid\n"), 1);
+	if (ac == 6 && ft_atoi(av[5]) == 0)
+		return (1);
 	return (0);
 }

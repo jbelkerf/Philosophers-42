@@ -6,21 +6,19 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 15:44:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/17 14:56:02 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/17 15:21:57 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-# include <pthread.h>  // *pthread_create pthread_detach  pthread_join 
-// *     pthread_mutex_init pthread_mutex_destroy, pthread_mutex_lock,
-//*               pthread_mutex_unlock
-# include <stdio.h>    //*printf
-# include <string.h>   //*memset 
-# include <stdlib.h>   //*malloc
-# include <unistd.h>   //*write  usleep 
-# include <sys/time.h> //*gettimeofday
+# include <pthread.h>
+# include <stdio.h>
+# include <string.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <sys/time.h>
 # include <limits.h> 
 
 typedef pthread_mutex_t	t_mutex;

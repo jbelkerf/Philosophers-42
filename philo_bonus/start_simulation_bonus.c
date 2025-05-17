@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 13:36:15 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/17 15:46:49 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/17 15:53:27 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ void	start_philo(t_philo *philo)
 void	start_simulation(t_philo *philos)
 {
 	int			i;
-	int			status;
-	t_philo		*philo;
 	pthread_t	tid[2];
 
 	i = -1;
