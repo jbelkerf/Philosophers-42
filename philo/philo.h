@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 15:44:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/17 14:53:34 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/17 14:56:02 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdlib.h>   //*malloc
 # include <unistd.h>   //*write  usleep 
 # include <sys/time.h> //*gettimeofday
+# include <limits.h> 
 
 typedef pthread_mutex_t	t_mutex;
 

@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 13:36:15 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/17 14:54:03 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/17 14:59:40 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,8 @@ void	*start_simulation(t_philo *philos)
 		return (handle_one_philo(&(philos[0])), NULL);
 	tids = philos->data->tids;
 	while (++i < philos[0].data->number_of_philos)
-	{
 		if (i % 2 == 0)
 			pthread_create(&(tids[i]), NULL, routine, &(philos[i]));
-	}
 	i = -1;
 	while (++i < philos[0].data->number_of_philos)
 	{

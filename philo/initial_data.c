@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 13:17:13 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/17 13:44:38 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/17 14:55:50 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,6 @@ t_data	*initialize_data(int ac, char **av)
 	}
 	return (data);
 }
-
-#include <limits.h> 
 
 t_philo	*initialize_philos(t_data *data)
 {
