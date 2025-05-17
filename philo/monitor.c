@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:32:23 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/17 13:42:42 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/17 19:53:00 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	die(t_philo *philo)
 	philo->data->death_spreed.value = 1;
 	unlock(&(philo->data->death_spreed.mutex));
 	lock(&(philo->data->print));
-	printf("%ld %d died\n", get_timestamp(philo), philo->philo_matricule);
+	printf("%ld %d died\n", get_timestamp(philo), philo->philo_matricule + 1);
 	unlock(&(philo->data->print));
 }
 

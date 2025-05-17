@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 13:36:15 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/17 14:59:40 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/17 19:54:45 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 
 void	log_routine(t_philo *philo, char *action)
 {
+	int	matricule;
+
+	matricule = philo->philo_matricule + 1;
 	if (getter(&(philo->data->death_spreed)))
 		return ;
 	lock(&(philo->data->print));
-	printf("%ld %d %s\n", get_timestamp(philo), philo->philo_matricule, action);
+	printf("%ld %d %s\n", get_timestamp(philo), matricule, action);
 	unlock(&(philo->data->print));
 }
 
