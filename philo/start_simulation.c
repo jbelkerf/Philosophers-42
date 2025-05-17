@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 13:36:15 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/16 13:16:48 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/17 14:54:03 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,15 @@ void	*routine(void *param)
 	return (NULL);
 }
 
-void	start_simulation(t_philo *philos)
+void	handle_one_philo(t_philo *philo)
+{
+	lock(philo->first_fork.fork);
+	log_routine(philo, "has taken a fork");
+	precise_sleep(philo, philo->data->time_to_die);
+	log_routine(philo, "died");
+}
+
+void	*start_simulation(t_philo *philos)
 {
 	int				i;
 	pthread_t		*tids;
@@ -48,6 +56,8 @@ void	start_simulation(t_philo *philos)
 
 	i = -1;
 	philos[0].data->start_time = get_current_time();
+	if (philos->data->number_of_philos == 1)
+		return (handle_one_philo(&(philos[0])), NULL);
 	tids = philos->data->tids;
 	while (++i < philos[0].data->number_of_philos)
 	{
@@ -65,4 +75,5 @@ void	start_simulation(t_philo *philos)
 	i = 0;
 	while (i < philos[0].data->number_of_philos)
 		pthread_join(philos[0].data->tids[i++], NULL);
+	return (NULL);
 }

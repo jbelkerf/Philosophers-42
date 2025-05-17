@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:14:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/29 20:38:17 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/17 13:53:01 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	set_forks(t_philo *philo)
 	}
 }
 
-void	precise_sleep(time_t time_to_wait)
+void	precise_sleep(t_philo *philo, time_t time_to_wait)
 {
 	time_t			start;
 	time_t			current;
@@ -47,6 +47,8 @@ void	precise_sleep(time_t time_to_wait)
 	{
 		usleep(100);
 		current = get_current_time();
+		if (should_stoped(philo))
+			return ;
 	}
 }
 

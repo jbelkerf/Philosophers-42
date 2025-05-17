@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 15:44:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/01 13:46:01 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/17 14:53:34 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct s_philo{
 }	t_philo;
 
 //* SIMULATION
-void	start_simulation(t_philo *philos);
+void	*start_simulation(t_philo *philos);
 void	*routine(void *param);
 
 //* PHILO ACTION
@@ -66,7 +66,7 @@ void	take_forks(t_philo *philo);
 void	ft_eat(t_philo *philo);
 void	give_forks(t_philo *philo);
 void	ft_sleep(t_philo *philo);
-void	precise_sleep(time_t time_to_wait);
+void	precise_sleep(t_philo *philo, time_t time_to_wait);
 void	ft_think(t_philo *philo);
 void	die(t_philo *philo);
 void	log_routine(t_philo *philo, char *action);
