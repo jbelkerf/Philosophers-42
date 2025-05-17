@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:14:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/17 16:03:31 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/17 19:57:45 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 void	log_routine(t_philo *philo, char *action)
 {
+	int	marticule;
+
+	marticule = philo->philo_matricule + 1;
 	sem_wait(philo->data->print.sem);
-	printf("%ld %d %s\n", get_timestamp(philo), philo->philo_matricule, action);
+	printf("%ld %d %s\n", get_timestamp(philo), marticule, action);
 	sem_post(philo->data->print.sem);
 }
 

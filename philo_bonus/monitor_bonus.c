@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:32:23 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/17 15:47:36 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/17 19:59:55 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	*monitor(void *arg)
 		{
 			matricule = philo->philo_matricule;
 			sem_wait(philo->data->print.sem);
-			printf("%ld %d died\n", get_timestamp(philo), matricule);
+			printf("%ld %d died\n", get_timestamp(philo), matricule + 1);
 			sem_post(philo->data->death_spreed.sem);
 			return (NULL);
 		}
