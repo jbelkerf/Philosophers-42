@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stop_simulation.c                                  :+:      :+:    :+:   */
+/*   stop_simulation_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:02:41 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/16 12:10:21 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/17 15:46:30 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 void	*watch_fat_philo_meals(void *arg)
 {

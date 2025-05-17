@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_resource.c                                    :+:      :+:    :+:   */
+/*   free_resource_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 15:38:10 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/16 12:06:48 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/17 15:47:44 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 void	destroy_mutex(t_mutex *mutex)
 {
