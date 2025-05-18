@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 15:38:10 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/04/29 11:51:19 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/18 13:46:32 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	destroy_philo_mutex(t_philo *philos)
 {
-	int	i;
-	t_mutex *forks;
+	int		i;
+	t_mutex	*forks;
 
 	forks = philos->data->forks;
 	i = 0;
