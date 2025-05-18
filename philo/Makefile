@@ -16,7 +16,7 @@ NAME=philo
 
 CC=cc
 
-CFLAGS= -Wall -Wextra -Werror
+CFLAGS= -Wall -Wextra -Werror 
 
 HEADER= philo.h
 

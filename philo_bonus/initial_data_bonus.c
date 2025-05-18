@@ -44,7 +44,6 @@ t_data	*set_input(t_data	*data, int ac, char **av)
 t_data	*initialize_data(int ac, char **av)
 {
 	t_data	*data;
-	int		i;
 	int		num;
 
 	data = malloc(sizeof(t_data));
@@ -54,10 +53,8 @@ t_data	*initialize_data(int ac, char **av)
 	num = data->number_of_philos;
 	data->print.sem = open_t_sem("/print", 1, &(data->print));
 	data->forks.sem = open_t_sem("/forks", num, &(data->forks));
-	if (data->optional != -1)
-		data->max_meals.sem = open_t_sem("/max_meals", 0, &(data->max_meals));
+	data->max_meals.sem = open_t_sem("/max_meals", 0, &(data->max_meals));
 	data->death_spreed.sem = open_t_sem("/death", 0, &(data->death_spreed));
-	i = 0;
 	data->pids = malloc(data->number_of_philos * sizeof(pid_t));
 	if (!data->pids)
 		return (NULL);

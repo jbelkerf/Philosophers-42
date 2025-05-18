@@ -14,9 +14,6 @@
 
 void	take_forks(t_philo *philo)
 {
-	int	matricule;
-
-	matricule = philo->philo_matricule;
 	sem_wait(philo->data->forks.sem);
 	log_routine(philo, "has taken a fork");
 	sem_wait(philo->data->forks.sem);

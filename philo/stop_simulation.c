@@ -41,9 +41,6 @@ int	max_meals(t_philo *philos)
 
 int	should_stoped(t_philo *philo)
 {
-	t_philo	*philos;
-
-	philos = philo->data->philos;
 	if (dead_spreed(philo->data))
 		return (1);
 	return (0);
