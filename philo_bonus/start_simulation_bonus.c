@@ -31,6 +31,14 @@ void	*routine(void *param)
 	return (NULL);
 }
 
+void	close_semaphores(t_philo *philo)
+{
+	sem_close(philo->data->max_meals.sem);	
+	sem_close(philo->data->forks.sem);	
+	sem_close(philo->data->death_spreed.sem);	
+	sem_close(philo->data->print.sem);	
+}
+
 void	start_philo(t_philo *philo)
 {
 	pthread_t	tid;
@@ -39,6 +47,7 @@ void	start_philo(t_philo *philo)
 	pthread_create(&tid, NULL, monitor, philo);
 	routine(philo);
 	pthread_join(tid, NULL);
+	close_semaphores(philo);
 	exit(1);
 }
 
