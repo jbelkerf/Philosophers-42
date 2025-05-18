@@ -6,19 +6,11 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 13:36:15 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/17 16:09:21 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/18 13:04:40 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
-
-void	unified_start(t_philo *philo)
-{
-	while (get_current_time() < philo->data->start_time)
-	{
-		usleep(5);
-	}
-}
 
 void	*routine(void *param)
 {
@@ -76,13 +68,25 @@ void	let_philos_be(t_philo *philos)
 	}
 }
 
-void	start_simulation(t_philo *philos)
+void	handle_one_philo(t_philo *philo)
+{
+	unified_start(philo);
+	log_routine(philo, "is thinking");
+	sem_wait(philo->data->forks.sem);
+	log_routine(philo, "has taken a fork");
+	precise_sleep(philo->data->time_to_die);
+	log_routine(philo, "died");
+}
+
+void	*start_simulation(t_philo *philos)
 {
 	int			i;
 	pthread_t	tid[2];
 
 	i = -1;
 	philos->data->start_time = get_current_time() + 3000;
+	if (philos->data->number_of_philos == 1)
+		return (handle_one_philo(&(philos[0])), NULL);
 	let_philos_be(philos);
 	if (philos->data->optional != -1)
 		pthread_create(&(tid[0]), NULL, watch_fat_philo_meals, philos->data);
@@ -96,4 +100,5 @@ void	start_simulation(t_philo *philos)
 		waitpid(philos->data->pids[i], NULL, 0);
 		i++;
 	}
+	return (NULL);
 }

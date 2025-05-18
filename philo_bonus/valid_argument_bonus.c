@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 13:39:13 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/17 15:59:34 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/18 12:55:41 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ long	time_atoi(char *str)
 	unsigned long	ff;
 
 	ff = 0;
+	if (*str == 0)
+		return (-1);
 	while (*str == '0')
 		str++;
 	if (ft_strlen(str) > ft_strlen("9223372036854775807"))

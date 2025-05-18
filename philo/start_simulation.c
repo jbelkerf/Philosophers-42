@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 13:36:15 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/17 19:54:45 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/18 12:48:44 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	*routine(void *param)
 
 void	handle_one_philo(t_philo *philo)
 {
+	log_routine(philo, "is thinking");
 	lock(philo->first_fork.fork);
 	log_routine(philo, "has taken a fork");
 	precise_sleep(philo, philo->data->time_to_die);

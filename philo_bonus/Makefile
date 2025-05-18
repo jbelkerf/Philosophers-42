@@ -6,7 +6,7 @@
 #    By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/17 16:30:24 by jbelkerf          #+#    #+#              #
-#    Updated: 2025/05/17 15:52:55 by jbelkerf         ###   ########.fr        #
+#    Updated: 2025/05/18 12:38:30 by jbelkerf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NAME=philo_bonus
 CC=cc
 
 
-CFLAGS= -Wall -Wextra -Werror -pthread 
+CFLAGS= -Wall -Wextra -Werror
 
 HEADER= philo_bonus.h
 

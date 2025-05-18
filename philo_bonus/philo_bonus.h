@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 15:44:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/17 15:47:13 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/18 13:02:25 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef struct s_philo
 }	t_philo;
 
 //* SIMULATION
-void	start_simulation(t_philo *philos);
+void	*start_simulation(t_philo *philos);
 void	*routine(void *param);
 
 //* PHILO ACTION

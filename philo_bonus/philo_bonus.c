@@ -6,11 +6,19 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:22:08 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/17 15:47:28 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/18 13:05:05 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
+
+void	unified_start(t_philo *philo)
+{
+	while (get_current_time() < philo->data->start_time)
+	{
+		usleep(5);
+	}
+}
 
 int	main(int ac, char **av)
 {

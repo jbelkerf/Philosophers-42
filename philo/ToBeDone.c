@@ -1,1 +1,0 @@
-//! philos start from 0
