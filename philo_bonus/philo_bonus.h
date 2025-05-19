@@ -6,24 +6,22 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 15:44:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/18 13:02:25 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/19 13:50:13 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_BONUS_H
 # define PHILO_BONUS_H
 
-# include <pthread.h>  // *pthread_create pthread_detach  pthread_join 
-// *     pthread_mutex_init pthread_mutex_destroy, pthread_mutex_lock,
-//*               pthread_mutex_unlock
-# include <stdio.h>    //*printf
-# include <stdlib.h>   //*malloc
-# include <unistd.h>   //*write  usleep 
-# include <sys/time.h> //*gettimeofday
+# include <pthread.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <sys/time.h>
 # include <semaphore.h>
-# include <sys/wait.h> //*waitpid
+# include <sys/wait.h>
 # include <signal.h>
-# include <fcntl.h>   //! i do this for O_CREAT
+# include <fcntl.h>
 
 typedef pthread_mutex_t	t_mutex;
 
@@ -67,7 +65,6 @@ typedef struct s_philo
 	t_data			*data;
 	t_flag_mu		last_meal;
 	t_flag_mu		number_of_meals;
-	t_flag_mu		started;
 }	t_philo;
 
 //* SIMULATION
@@ -106,6 +103,7 @@ int		max_meals(t_philo *philos);
 int		should_stoped(t_philo *philo);
 void	*watch_fat_philo_meals(void *arg);
 void	*declare_war(void *arg);
+void	close_semaphores(t_philo *philo);
 
 //* FREE RESOURCES
 void	free_resources(t_philo *philos);

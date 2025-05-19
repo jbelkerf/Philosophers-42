@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 13:36:15 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/18 13:04:40 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/19 13:48:30 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,6 @@ void	*routine(void *param)
 		ft_sleep(philo);
 	}
 	return (NULL);
-}
-
-void	close_semaphores(t_philo *philo)
-{
-	sem_close(philo->data->max_meals.sem);	
-	sem_close(philo->data->forks.sem);	
-	sem_close(philo->data->death_spreed.sem);	
-	sem_close(philo->data->print.sem);	
 }
 
 void	start_philo(t_philo *philo)

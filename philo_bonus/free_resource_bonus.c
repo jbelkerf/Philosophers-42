@@ -6,23 +6,32 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 15:38:10 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/17 15:47:44 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/19 13:49:44 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-void	destroy_mutex(t_mutex *mutex)
+void	close_semaphores(t_philo *philo)
 {
-	pthread_mutex_destroy(mutex);
+	sem_close(philo->data->max_meals.sem);
+	sem_close(philo->data->forks.sem);
+	sem_close(philo->data->death_spreed.sem);
+	sem_close(philo->data->print.sem);
 }
 
 void	free_resources(t_philo *philos)
 {
-	sem_close(philos->data->death_spreed.sem);
-	sem_close(philos->data->forks.sem);
-	sem_close(philos->data->print.sem);
-	sem_close(philos->data->max_meals.sem);
+	int	i;
+
+	i = 0;
+	while (i < philos->data->number_of_philos)
+	{
+		pthread_mutex_destroy(&(philos[i].last_meal.mutex));
+		pthread_mutex_destroy(&(philos[i].number_of_meals.mutex));
+		i++;
+	}
+	close_semaphores(philos);
 	sem_unlink(philos->data->death_spreed.path);
 	sem_unlink(philos->data->print.path);
 	sem_unlink(philos->data->forks.path);
