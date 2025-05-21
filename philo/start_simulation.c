@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 13:36:15 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/18 12:48:44 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/21 13:38:43 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	*routine(void *param)
 
 	philo = param;
 	setter(&(philo->last_meal), get_current_time());
+	if (philo->philo_matricule % 2 == 0)
+		ft_sleep(philo);
 	while (1337)
 	{
 		ft_think(philo);

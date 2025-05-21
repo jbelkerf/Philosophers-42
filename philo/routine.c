@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:04:30 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/17 13:54:20 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/21 13:40:21 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,10 @@ void	take_forks(t_philo *philo)
 	if (should_stoped(philo))
 		return ;
 	matricule = philo->philo_matricule;
-	if (matricule % 2 == 0)
-	{
-		lock(philo->first_fork.fork);
-		log_routine(philo, "has taken a fork");
-		lock(philo->second_fork.fork);
-		log_routine(philo, "has taken a fork");
-	}
-	else
-	{
-		lock(philo->second_fork.fork);
-		log_routine(philo, "has taken a fork");
-		lock(philo->first_fork.fork);
-		log_routine(philo, "has taken a fork");
-	}
+	lock(philo->second_fork.fork);
+	log_routine(philo, "has taken a fork");
+	lock(philo->first_fork.fork);
+	log_routine(philo, "has taken a fork");
 }
 
 void	ft_eat(t_philo *philo)
