@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 15:44:56 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/19 13:50:13 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/21 13:11:42 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ typedef struct s_flag_sm
 	char			*path;
 	long			value;
 }	t_flag_sm;
-
-
 
 typedef struct s_data
 {

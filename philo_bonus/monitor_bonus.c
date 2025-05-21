@@ -6,20 +6,18 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:32:23 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/17 19:59:55 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/21 13:03:53 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-
-
 void	*monitor(void *arg)
 {
 	t_philo	*philo;
-	int		matricule;
 	time_t	last_meal;
 	time_t	to_die;
+	int		matricule;
 
 	philo = arg;
 	to_die = philo->data->time_to_die;

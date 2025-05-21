@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 13:36:15 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/19 13:48:30 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/21 13:10:44 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	start_philo(t_philo *philo)
 	pthread_create(&tid, NULL, monitor, philo);
 	routine(philo);
 	pthread_join(tid, NULL);
-	close_semaphores(philo);
 	exit(1);
 }
 

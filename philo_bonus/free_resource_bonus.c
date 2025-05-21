@@ -6,7 +6,7 @@
 /*   By: jbelkerf <jbelkerf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 15:38:10 by jbelkerf          #+#    #+#             */
-/*   Updated: 2025/05/19 13:49:44 by jbelkerf         ###   ########.fr       */
+/*   Updated: 2025/05/21 13:03:06 by jbelkerf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,10 @@ void	close_semaphores(t_philo *philo)
 
 void	free_resources(t_philo *philos)
 {
-	
 	close_semaphores(philos);
 	sem_unlink(philos->data->death_spreed.path);
-	sem_close(philos->data->last_meal.sem);
-	sem_close(philos->data->meal_num.sem);
+	sem_unlink(philos->data->last_meal.path);
+	sem_unlink(philos->data->meal_num.path);
 	sem_unlink(philos->data->forks.path);
 	sem_unlink(philos->data->max_meals.path);
 	sem_unlink(philos->data->print.path);
