@@ -17,7 +17,7 @@ NAME=philo_bonus
 CC=cc
 
 
-CFLAGS= -Wall -Wextra -Werror 
+CFLAGS= -Wall -Wextra -Werror -fsanitize=thread
 
 HEADER= philo_bonus.h
 

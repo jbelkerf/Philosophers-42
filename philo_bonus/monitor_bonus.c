@@ -25,7 +25,7 @@ void	*monitor(void *arg)
 	to_die = philo->data->time_to_die;
 	while (1337)
 	{
-		last_meal = get_current_time() - getter(&(philo->last_meal));
+		last_meal = get_current_time() - get_sem(&(philo->data->last_meal));
 		if (last_meal >= to_die)
 		{
 			matricule = philo->philo_matricule;
