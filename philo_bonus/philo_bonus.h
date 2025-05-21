@@ -35,13 +35,10 @@ typedef struct s_flag_sm
 {
 	sem_t			*sem;
 	char			*path;
+	long			value;
 }	t_flag_sm;
 
-typedef struct s_flag_mu
-{
-	t_mutex			mutex;
-	long			value;
-}	t_flag_mu;
+
 
 typedef struct s_data
 {
@@ -51,6 +48,8 @@ typedef struct s_data
 	t_flag_sm		forks;
 	t_flag_sm		death_spreed;
 	t_flag_sm		max_meals;
+	t_flag_sm		last_meal;
+	t_flag_sm		meal_num;
 	time_t			time_to_die;
 	time_t			time_to_eat;
 	time_t			time_to_sleep;
@@ -63,8 +62,6 @@ typedef struct s_philo
 {
 	int				philo_matricule;
 	t_data			*data;
-	t_flag_mu		last_meal;
-	t_flag_mu		number_of_meals;
 }	t_philo;
 
 //* SIMULATION
@@ -111,15 +108,10 @@ void	free_resources(t_philo *philos);
 //* MOUNITOR
 void	*monitor(void *arg);
 
-//* MUTEX HANDING
-void	lock(t_mutex *mutex);
-void	unlock(t_mutex *mutex);
-
 //* SETTER GETTER
-long	getter(t_flag_mu *flag);
-void	setter(t_flag_mu *flag, long value);
-void	increment_flag(t_flag_mu *flag);
-
+long	get_sem(t_flag_sm *flag);
+void	set_sem(t_flag_sm *flag, long value);
+void	increment_sem(t_flag_sm *flag);
 //* start
 void	unified_start(t_philo *philo);
 

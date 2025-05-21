@@ -55,6 +55,9 @@ t_data	*initialize_data(int ac, char **av)
 	data->forks.sem = open_t_sem("/forks", num, &(data->forks));
 	data->max_meals.sem = open_t_sem("/max_meals", 0, &(data->max_meals));
 	data->death_spreed.sem = open_t_sem("/death", 0, &(data->death_spreed));
+	data->last_meal.sem = open_t_sem("/last_meal", 1, &(data->last_meal));
+	data->meal_num.sem = open_t_sem("/meal_num", 1, &(data->meal_num));
+	data->last_meal.value = 9223372036854775806;
 	data->pids = malloc(data->number_of_philos * sizeof(pid_t));
 	if (!data->pids)
 		return (NULL);
@@ -75,10 +78,6 @@ t_philo	*initialize_philos(t_data *data)
 	{
 		philos[i].data = data;
 		philos[i].philo_matricule = i;
-		philos[i].last_meal.value = 9223372036854775806;
-		pthread_mutex_init(&(philos[i].last_meal.mutex), NULL);
-		pthread_mutex_init(&(philos[i].number_of_meals.mutex), NULL);
-		philos[i].number_of_meals.value = 0;
 		i++;
 	}
 	return (philos);

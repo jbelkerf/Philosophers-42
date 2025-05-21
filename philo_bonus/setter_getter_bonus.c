@@ -12,26 +12,27 @@
 
 #include "philo_bonus.h"
 
-long	getter(t_flag_mu *flag)
+
+
+long	get_sem(t_flag_sm *flag)
 {
 	long	value;
-
-	lock(&(flag->mutex));
+	sem_wait(flag->sem);
 	value = flag->value;
-	unlock(&(flag->mutex));
+	sem_post(flag->sem);
 	return (value);
 }
 
-void	setter(t_flag_mu *flag, long value)
+void	set_sem(t_flag_sm *flag, long value)
 {
-	lock(&((*flag).mutex));
-	(*flag).value = value;
-	unlock(&((*flag).mutex));
+	sem_wait(flag->sem);
+	flag->value = value;
+	sem_post(flag->sem);
 }
 
-void	increment_flag(t_flag_mu *flag)
+void	increment_sem(t_flag_sm *flag)
 {
-	lock(&(flag->mutex));
-	flag->value++;
-	unlock(&(flag->mutex));
+	sem_wait(flag->sem);
+	flag->value = flag->value + 1;
+	sem_post(flag->sem);
 }

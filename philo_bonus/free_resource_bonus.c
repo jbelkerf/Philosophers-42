@@ -22,15 +22,7 @@ void	close_semaphores(t_philo *philo)
 
 void	free_resources(t_philo *philos)
 {
-	int	i;
-
-	i = 0;
-	while (i < philos->data->number_of_philos)
-	{
-		pthread_mutex_destroy(&(philos[i].last_meal.mutex));
-		pthread_mutex_destroy(&(philos[i].number_of_meals.mutex));
-		i++;
-	}
+	
 	close_semaphores(philos);
 	sem_unlink(philos->data->death_spreed.path);
 	sem_unlink(philos->data->print.path);

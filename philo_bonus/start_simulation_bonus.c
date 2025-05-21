@@ -17,7 +17,7 @@ void	*routine(void *param)
 	t_philo	*philo;
 
 	philo = param;
-	setter(&(philo->last_meal), get_current_time());
+	set_sem(&(philo->last_meal), get_current_time());
 	if (philo->philo_matricule % 2 == 0)
 		ft_sleep(philo);
 	while (1337)

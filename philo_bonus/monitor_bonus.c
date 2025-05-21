@@ -12,15 +12,7 @@
 
 #include "philo_bonus.h"
 
-void	lock(t_mutex *mutex)
-{
-	pthread_mutex_lock(mutex);
-}
 
-void	unlock(t_mutex *mutex)
-{
-	pthread_mutex_unlock(mutex);
-}
 
 void	*monitor(void *arg)
 {
