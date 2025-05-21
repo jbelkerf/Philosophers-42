@@ -17,6 +17,8 @@ void	close_semaphores(t_philo *philo)
 	sem_close(philo->data->max_meals.sem);
 	sem_close(philo->data->forks.sem);
 	sem_close(philo->data->death_spreed.sem);
+	sem_close(philo->data->last_meal.sem);
+	sem_close(philo->data->meal_num.sem);
 	sem_close(philo->data->print.sem);
 }
 
@@ -25,9 +27,11 @@ void	free_resources(t_philo *philos)
 	
 	close_semaphores(philos);
 	sem_unlink(philos->data->death_spreed.path);
-	sem_unlink(philos->data->print.path);
+	sem_close(philos->data->last_meal.sem);
+	sem_close(philos->data->meal_num.sem);
 	sem_unlink(philos->data->forks.path);
 	sem_unlink(philos->data->max_meals.path);
+	sem_unlink(philos->data->print.path);
 	free(philos[0].data->pids);
 	free(philos[0].data);
 	free(philos);

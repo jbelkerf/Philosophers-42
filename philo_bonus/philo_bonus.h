@@ -75,7 +75,6 @@ void	give_forks(t_philo *philo);
 void	ft_sleep(t_philo *philo);
 void	precise_sleep(time_t time_to_wait);
 void	ft_think(t_philo *philo);
-void	die(t_philo *philo);
 void	log_routine(t_philo *philo, char *action);
 
 //* ATOI
@@ -86,15 +85,11 @@ t_philo	*initialize_philos(t_data *data);
 t_data	*initialize_data(int ac, char **av);
 int		non_valid_arguments(char **av, int ac);
 
-//* FORKS
-void	set_forks(t_philo *philo);
-
 //* TIME
 long	get_timestamp(t_philo *philo);
 
 //* TOOLS
 time_t	get_current_time(void);
-int		max_meals(t_philo *philos);
 
 //* STOP SIMULATION
 int		should_stoped(t_philo *philo);
@@ -112,6 +107,7 @@ void	*monitor(void *arg);
 long	get_sem(t_flag_sm *flag);
 void	set_sem(t_flag_sm *flag, long value);
 void	increment_sem(t_flag_sm *flag);
+
 //* start
 void	unified_start(t_philo *philo);
 
